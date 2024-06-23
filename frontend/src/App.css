@@ -1,0 +1,56 @@
+/* .App {
+    font-family: sans-serif;
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .notification-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 300px;
+    margin: 20px auto;
+    text-align: center;
+  }
+  
+  .notification-title {
+    font-weight: bold;
+  }
+  
+  .notification-content {
+    margin: 10px 0;
+  }
+  
+  .continue-button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .continue-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .edit-box {
+    margin-top: 20px;
+    width: calc(100% - 20px);
+    padding: 10px;
+    box-sizing: border-box;
+  } */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+}

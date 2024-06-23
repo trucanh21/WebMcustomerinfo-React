@@ -1,0 +1,84 @@
+/* Styles specific to the popup */
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50vw;
+    /* Adjust width percentage as needed */
+    max-width: 600px;
+    /* Adjust max-width as needed */
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    flex-direction: column;
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-header {
+    display: flex;
+    color: #0149CD;
+    padding-bottom: 20px;
+    justify-content: space-between;
+    padding-left: 10px;
+    /* align-items: center; */
+    /* Optional: if you want to center the items vertically as well */
+}
+
+.popup-body {
+    display: flex;
+}
+
+input {
+    padding: 5px;
+    font-size: 16px;
+}
+
+.space-popup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    font-weight: 600;
+}
+
+select {
+    width: 250px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+/* Apply styles to form buttons */
+.btn {
+    padding: 8px 16px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+.btn-primary {
+    background-color: #0149CD;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btn-danger {
+    background-color: #F24405;
+    margin-right: 100px;
+}
+
+.close {
+    font-size: 25px;
+}
+ion-icon {
+    font-size: 18px;
+}

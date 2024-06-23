@@ -1,0 +1,85 @@
+.container {
+    padding: 10px;
+    flex: 1;
+    transition: filter 0.3s ease;
+    /* Ensure transition for smooth effect */
+}
+
+.btn-edit{
+    font-size: 21px;
+    color: #0149CD;
+}
+
+ion-icon{
+    font-size: 20px;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin: 20px 0;
+}
+
+.styled-table thead tr {
+    background-color: #0149CD;
+    color: #ffffff;
+    text-align: left;
+}
+
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+    white-space: nowrap;
+}
+
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #4076;
+}
+
+.button-header {
+    background-color: #0149CD;
+    color: white;
+    border: none;
+    outline: none;
+    align-items: center;
+    padding: 20px;
+    display: inline-flex;
+    height: 50px;
+    border-radius: 5px;
+    overflow: hidden;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.button-text,
+.button-icon {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+}
+
+h3 {
+    font-size: 1.64rem;
+    line-height: 1.5;
+    font-size: 23px;
+    padding: 10px 0;
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+}
