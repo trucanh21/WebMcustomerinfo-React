@@ -1,12 +1,12 @@
 import React from 'react';
-import '../assets/css/Popup.css';
+import '../../assets/css/Popup.css';
 
-const PopupDelete = ({ onClose  }) => {
+const PopupShow = ({ onClose  }) => {
   return (
     <div className="popup">
       <div className="popup-content">
         <div className="popup-header">
-          <h2>Sửa khách hàng</h2>
+          <h2>Thêm khách hàng</h2>
           <ion-icon name="close" className="close" onClick={onClose}></ion-icon>
         </div>
         <div className="popup-body">
@@ -60,4 +60,4 @@ const PopupDelete = ({ onClose  }) => {
   );
 };
 
-export default PopupDelete;
+export default PopupShow;

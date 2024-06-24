@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import '../assets/css/Sidebar.css';
+import '../../assets/css/Sidebar.css';
 
 //import link img 
-import LogoDTSoft from '../assets/img/LogoDTSoft.png';
-import iconQLSP from '../assets/img/icon/gift.png';
-import iconQLBH from '../assets/img/icon/contract.png';
-import iconQLHD from '../assets/img/icon/payment.png';
-import iconQLBT from '../assets/img/icon/work.png';
+import LogoDTSoft from '../../assets/img/LogoDTSoft.png';
+import iconQLSP from '../../assets/img/icon/gift.png';
+import iconQLBH from '../../assets/img/icon/contract.png';
+import iconQLHD from '../../assets/img/icon/payment.png';
+import iconQLBT from '../../assets/img/icon/work.png';
 
 
 const Sidebar = () => {

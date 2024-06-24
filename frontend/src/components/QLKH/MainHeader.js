@@ -1,6 +1,6 @@
 import React from 'react';
-import '../assets/css/MainHeader.css';
-import logoAdmin from '../assets/img/profile.jpg'
+import '../../assets/css/MainHeader.css';
+import logoAdmin from '../../assets/img/profile.jpg'
 
 const MainHeader = () => {
   return (

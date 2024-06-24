@@ -1,12 +1,10 @@
-import Sidebar from "./components/Sidebar";
-import MainPanel from "./components/MainPanel";
+import QLKH from './pages/QLKH'
 import "./App.css";
 
 function App() {
   return (
-    <div className="wrapper">
-      <Sidebar />
-      <MainPanel />
+    <div className="test">
+      <QLKH />
     </div>
   );
 }

@@ -1,10 +1,9 @@
 import React from 'react';
-import '../assets/css/Container.css';
-import '../assets/css/Popup.css';
-
+import '../../assets/css/Container.css';
+import '../../assets/css/Popup.css';
 import Popup from 'reactjs-popup';
-import PopupContent from './PopupContent'; 
-import PopupDelete from './PopupDelete';
+import PopupContent from '../../components/QLKH/PopupContent'; 
+import PopupDelete from '../../components/QLKH/PopupDelete';
 
 const Container = () => {
   return (
