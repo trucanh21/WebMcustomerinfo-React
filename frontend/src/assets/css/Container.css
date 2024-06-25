@@ -5,12 +5,12 @@
     /* Ensure transition for smooth effect */
 }
 
-.btn-edit{
+.btn-edit {
     font-size: 21px;
     color: #0149CD;
 }
 
-ion-icon{
+ion-icon {
     font-size: 20px;
 }
 
@@ -32,7 +32,11 @@ ion-icon{
 .styled-table th,
 .styled-table td {
     padding: 12px 15px;
-    white-space: nowrap;
+    /*white-space: nowrap;*/
+}
+
+.styled-table th {
+    text-align: center
 }
 
 .styled-table tbody tr {
@@ -82,4 +86,10 @@ h3 {
 .page-header {
     display: flex;
     justify-content: space-between;
+}
+
+.table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling on mobile */
 }
