@@ -46,7 +46,7 @@ form button[type="submit"] {
 }
 
 form button[type="submit"]:hover {
-    background-color: #218838;
+    background-color: #1349af;
 }
 
 /* Kiểu cho tiêu đề của form nếu có */
@@ -81,9 +81,16 @@ form h2 {
 
 /* Đặt kiểu cho button trong trang đăng nhập */
 .login-form button[type="submit"] {
-    background-color: #FF4500; /* Màu cam cho nút đăng nhập */
+    background-color: #0149CD; /* Màu xanh đậm cho nút đăng ký */
+    /* Màu cam cho nút đăng nhập */
 }
 
 .login-form button[type="submit"]:hover {
-    background-color: #FF6347;
+    background-color: #1349af;
 }
+/* .login-form h1 {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 32px;
+    color: #333;
+} */

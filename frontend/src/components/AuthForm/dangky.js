@@ -29,9 +29,12 @@ const RegistrationForm = () => {
     };
 
     return (
+        <div className="login-container">
+        <h1> Đăng Ký </h1>
         <form onSubmit={handleSubmit}>
+            
             <div>
-                <label>Username:</label>
+                <label>Tên đăng nhập:</label>
                 <input
                     type="text"
                     name="username"
@@ -41,7 +44,7 @@ const RegistrationForm = () => {
                 />
             </div>
             <div>
-                <label>Password:</label>
+                <label>Mật khẩu:</label>
                 <input
                     type="password"
                     name="password"
@@ -131,6 +134,17 @@ const RegistrationForm = () => {
             )}
             <button type="submit">Đăng ký</button>
         </form>
+        <style jsx>{`
+                h1 {
+                    margin-bottom: 30px;
+                    margin-top: 30px;
+                    font-size: 32px;
+                    text-align: center;
+                    color: #333;
+                }
+            `}</style>
+        </div>
+        
     );
 };
 

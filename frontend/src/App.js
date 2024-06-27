@@ -1,14 +1,14 @@
 import QLKH from "./pages/QLKH";
-import LoginForm from "./components/dangnhap/dangnhap";
+import LoginForm from "./components/AuthForm/dangnhap";
 import "./App.css";
-import RegistrationForm from './components/dangnhap/dangky';
+import RegistrationForm from "./components/AuthForm/dangky";
 
 function App() {
   return (
     <div className="test">
       {/* <QLKH/> */}
-      {/* <RegistrationForm/> */}
-      <LoginForm/>
+      <RegistrationForm/>
+      {/* <LoginForm/> */}
     </div>
   );
 }
