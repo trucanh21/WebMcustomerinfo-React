@@ -17,6 +17,7 @@ CREATE TABLE KhachHang (
 Create Table SanPham(
 	SP_ID INT(10) PRIMARY KEY AUTO_INCREMENT,
     SP_Ten VARCHAR(100) NOT NULL
+    
 );
 
 -- Tạo bảng Quản trị
@@ -24,6 +25,7 @@ CREATE TABLE QuanTri (
     QT_ID INT(10) PRIMARY KEY AUTO_INCREMENT,
     QT_Ten VARCHAR(100) NOT NULL,
     QT_PhanCap VARCHAR(10) NOT NULL, -- 'xa', 'huyen', 'tinh' '0'. '1', '2'
+    matkhau VARCHAR(255) NOT NULL
 ) CHARACTER SET = UTF8;
 
 -- Tạo bảng Hợp đòng

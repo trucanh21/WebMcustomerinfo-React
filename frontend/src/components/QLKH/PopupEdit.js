@@ -1,8 +1,9 @@
+// PopupEdit.js
 import React, { useState, useEffect } from 'react';
-import { fetchProvinces, fetchDistrictsByProvince, fetchWardsByDistrict, updateCustomer  } from '../../features/apiCalls';
+import { fetchProvinces, fetchDistrictsByProvince, fetchWardsByDistrict, updateCustomer } from '../../features/apiCalls';
 import '../../assets/css/Popup.css';
 
-const PopupEdit = ({ onClose }) => {
+const PopupEdit = ({ onClose, customer }) => { // Receive customer prop
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);

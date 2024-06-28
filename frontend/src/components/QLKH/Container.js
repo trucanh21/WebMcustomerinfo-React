@@ -1,26 +1,55 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../assets/css/Container.css';
 import '../../assets/css/Popup.css';
 import Popup from 'reactjs-popup';
 import PopupContent from '../../components/QLKH/PopupContent'; 
-import PopupDelete from '../../components/QLKH/PopupDelete';
+import PopupEdit from '../../components/QLKH/PopupEdit';
+// import PopupDelete from '../../components/QLKH/PopupDelete';
+import { fetchCustomers } from '../../features/apiCalls';
 
 const Container = () => {
+  const [customers, setCustomers] = useState([]);
+  const [selectedCustomer, setSelectedCustomer] = useState(null); // State to hold selected customer
+  const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
+
+  useEffect(() => {
+    const getCustomers = async () => {
+      try {
+        const customersData = await fetchCustomers();
+        setCustomers(customersData);
+      } catch (error) {
+        console.error('Error fetching customers', error);
+      }
+    };
+
+    getCustomers();
+  }, []);
+
+  const handleEditClick = (customer) => {
+    setSelectedCustomer(customer); // Set the selected customer
+    setIsEditPopupOpen(true);
+  };
+
+  const closeEditPopup = () => {
+    setIsEditPopupOpen(false);
+    setSelectedCustomer(null);
+  };
+
   return (
     <div className="container">
       <div className="page-inner">
         <div className="page-header">
           <h3>Quản lý khách hàng</h3>
           <div className="page-header-button">
-            <Popup trigger = {
-            <button className="button-header">
-              <div className="button-add-export">
-                <span className="button-icon"><ion-icon name="person-add"></ion-icon></span>
-                <span className="button-text">Thêm khách hàng</span>
-              </div>
-            </button>} modal nested>
+            <Popup trigger={
+              <button className="button-header">
+                <div className="button-add-export">
+                  <span className="button-icon"><ion-icon name="person-add"></ion-icon></span>
+                  <span className="button-text">Thêm khách hàng</span>
+                </div>
+              </button>} modal nested>
               {close => <PopupContent onClose={close} />}
-              </Popup>
+            </Popup>
             <button className="button-header">
               <div className="button-add-export">
                 <span className="button-icon"><ion-icon name="download-sharp"></ion-icon></span>
@@ -46,27 +75,31 @@ const Container = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>KH1</td>
-                  <td>Phòng Kinh tế và Hạ tầng huyện Gò Quao</td>
-                  <td>Lý Hoàng Nhủ</td>
-                  <td>0946 902 617</td>
-                  <td>9523.3.1018028 Tại KBNN Gò Quao</td>
-                  <td>Giáo dục</td>
-                  <td>Tỉnh</td>
-                  <td>Tân Đức, Đầm Dơi, Cà Mau</td>
-                  <Popup trigger = {<td>
-                    <ion-icon name="create"></ion-icon></td>
-                  }modal nested>
-                {close => <PopupDelete onClose={close} />}
-                </Popup>
-                </tr>
-                {/* More rows... */}
+                {customers.map((customer) => (
+                  <tr key={customer.KH_ID}>
+                    <td>{customer.KH_ID}</td>
+                    <td>{customer.KH_Ten}</td>
+                    <td>{customer.KH_DaiDien}</td>
+                    <td>{customer.KH_SDT}</td>
+                    <td>{customer.KH_TaiKhoan}</td>
+                    <td>{customer.KH_PLDonVi}</td>
+                    <td>{customer.KH_BPQuanLy}</td>
+                    <td>{customer.KH_DiaChi}</td>
+                    <td>
+                      <ion-icon name="create" onClick={() => handleEditClick(customer)}></ion-icon>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
         </div>
       </div>
+      {isEditPopupOpen && (
+        <Popup open={isEditPopupOpen} onClose={closeEditPopup} modal nested>
+          {close => <PopupEdit onClose={closeEditPopup} customer={selectedCustomer} />}
+        </Popup>
+      )}
     </div>
   );
 };
