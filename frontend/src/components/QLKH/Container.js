@@ -69,7 +69,6 @@ const Container = () => {
                   <th>Điện thoại</th>
                   <th>Tài khoản</th>
                   <th>Phân loại đơn vị</th>
-                  <th>Bộ phận quản lý</th>
                   <th>Địa chỉ</th>
                   <th>Thao tác</th>
                 </tr>
@@ -83,7 +82,6 @@ const Container = () => {
                     <td>{customer.KH_SDT}</td>
                     <td>{customer.KH_TaiKhoan}</td>
                     <td>{customer.KH_PLDonVi}</td>
-                    <td>{customer.KH_BPQuanLy}</td>
                     <td>{customer.KH_DiaChi}</td>
                     <td>
                       <ion-icon name="create" onClick={() => handleEditClick(customer)}></ion-icon>
