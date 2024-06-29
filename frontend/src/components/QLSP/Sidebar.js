@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import '../../assets/css/Sidebar.css';
+import { Link } from 'react-router-dom';
 
 //import link img 
 import LogoDTSoft from '../../assets/img/LogoDTSoft.png';
@@ -54,34 +55,34 @@ const Sidebar = () => {
             </a>
           </li>
           <li className="nav-item active">
-            <a href="" >
+            <Link to="/qlkh">
               <ion-icon name="people-outline"></ion-icon>
               <p className="header-menu">Quản lý khách hàng</p>
-            </a>
+            </Link>
           </li>
           <li className="nav-item active">
-            <a href="" className='choose-menu'>
+            <Link to="/qlsp" className='choose-menu'>
               <img src={iconQLSP} className="icon-sidebar" />
               <p className="header-menu">Quản lý sản phẩm</p>
-            </a>
+            </Link>
           </li>
           <li className="nav-item active">
-            <a href="">
+           <Link to="/qlbh">
               <img src={iconQLBH} className="icon-sidebar" />
               <p className="header-menu">Quản lý bảo hành</p>
-            </a>
+            </Link>
           </li>
           <li className="nav-item active">
-            <a href="">
+            <Link to="/qlhd">
               <img src={iconQLHD} className="icon-sidebar" />
               <p className="header-menu">Quản lý hóa đơn</p>
-            </a>
+            </Link>
           </li>
           <li className="nav-item active">
-            <a href="">
+            <Link to="/qlbt">
               <img src={iconQLBT} className="icon-sidebar" />
               <p className="header-menu">Quản lý bảo trì</p>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
