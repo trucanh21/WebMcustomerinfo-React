@@ -3,6 +3,8 @@ import axios from 'axios';
 const API_BASE_URL = 'http://localhost:3000/api/contacts/';
 const ADDRESS_API_BASE_URL = 'http://localhost:3000/api';
 
+
+// ----------------------- API CUSTOMER --------------------
 export const fetchCustomers = async () => {
   try {
     const response = await axios.get(API_BASE_URL);
@@ -72,3 +74,5 @@ export const fetchWardsByDistrict = async (districtId) => {
     throw error;
   }
 };
+
+// ----------------------- API PRODUCT --------------------
