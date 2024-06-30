@@ -1,32 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../assets/css/Container.css';
 import '../../assets/css/Popup.css';
 import Popup from 'reactjs-popup';
 import PopupContent from '../../components/QLSP/PopupContent'; 
-import PopupDelete from '../../components/QLSP/PopupDelete';
+// import PopupDelete from '../../components/QLSP/PopupDelete';
+import { fetchProducts } from '../../features/apiCalls';
 
 const Container = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const productsData = await fetchProducts();
+        setProducts(productsData);
+      } catch (error) {
+        console.error('Error fetching products', error); // Corrected the error message
+      }
+    };
+
+    getProducts();
+  }, []);
+
   return (
     <div className="container">
       <div className="page-inner">
         <div className="page-header">
           <h3>Quản lý sản phẩm</h3>
           <div className="page-header-button">
-            <Popup trigger = {
-            <button className="button-header">
-              <div className="button-add-export">
-                <span className="button-icon"><ion-icon name="person-add"></ion-icon></span>
-                <span className="button-text">Thêm sản phẩm</span>
-              </div>
-            </button>} modal nested>
+            <Popup trigger={
+              <button className="button-header">
+                <div className="button-add-export">
+                  <span className="button-icon"><ion-icon name="person-add"></ion-icon></span>
+                  <span className="button-text">Thêm sản phẩm</span>
+                </div>
+              </button>} modal nested>
               {close => <PopupContent onClose={close} />}
-              </Popup>
-            {/* <button className="button-header">
-              <div className="button-add-export">
-                <span className="button-icon"><ion-icon name="download-sharp"></ion-icon></span>
-                <span className="button-text">Xuất excel</span>
-              </div>
-            </button> */}
+            </Popup>
           </div>
         </div>
         <div className="col-sm-12 sticky-table">
@@ -42,18 +52,17 @@ const Container = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>SP1</td>
-                  <td>Kinh phí nâng cấp phần mềm KTHC</td>
-                  <td>10-10-2023</td>
-                  <td>Văn phòng 1</td>
-                  <Popup trigger = {<td>
-                    <ion-icon name="create"></ion-icon></td>
-                  }modal nested>
-                {close => <PopupDelete onClose={close} />}
-                </Popup>
-                </tr>
-                {/* More rows... */}
+                {products.map((product) => (
+                  <tr key={product.SP_ID}>
+                    <td>{product.SP_ID}</td>
+                    <td>{product.SP_Ten}</td>
+                    <td>{product.SP_NgayNhap}</td>
+                    <td>{product.SP_BPQuanLy}</td>
+                    <td>
+                      <ion-icon name="create"></ion-icon>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>

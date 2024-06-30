@@ -1,7 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../assets/css/Popup.css';
+import { addProduct } from '../../features/apiCalls';
 
-const PopupShow = ({ onClose  }) => {
+const PopupShow = ({ onClose }) => {
+  const [formData, setFormData] = useState({
+    SP_Ten: '',
+    SP_NgayNhap: '',
+    SP_BPQuanLy: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await addProduct(formData);
+      onClose(); // Close the popup on successful addition
+    } catch (error) {
+      console.error('Error adding product', error);
+      // Handle error (e.g., display an error message to the user)
+    }
+  };
+
   return (
     <div className="popup">
       <div className="popup-content">
@@ -10,31 +33,51 @@ const PopupShow = ({ onClose  }) => {
           <ion-icon name="close" className="close" onClick={onClose}></ion-icon>
         </div>
         <div className="popup-body">
-          <div className="popup-column">
-            <div className="space-popup">
-              <label>Mã SP:</label>
-              <input type="text"/>
+          <form onSubmit={handleSubmit}>
+            <div className="popup-column">
+              <div className="space-popup">
+                <label>Tên sản phẩm:</label>
+                <input
+                  type="text"
+                  name="SP_Ten"
+                  placeholder="Nhập tên sản phẩm"
+                  value={formData.SP_Ten}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="space-popup">
+                <label>Ngày nhập:</label>
+                <input
+                  type="date"
+                  name="SP_NgayNhap"
+                  placeholder="Ngày nhập"
+                  value={formData.SP_NgayNhap}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <button type="button" className="ml-2 btn btn-danger" onClick={onClose}>
+                Hủy
+              </button>
             </div>
-            <div className="space-popup">
-              <label>Tên sản phẩm:</label>
-              <input type="text" placeholder="Nhập tên sản phẩm" />
+            <div className="popup-column">
+              <div className="space-popup">
+                <label>Bộ phận quản lý:</label>
+                <input
+                  type="text"
+                  name="SP_BPQuanLy"
+                  placeholder="Nhập bộ phận quản lý"
+                  value={formData.SP_BPQuanLy}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <button type="submit" className="btn btn-primary">
+                Thêm
+              </button>
             </div>
-
-            <button type="button" className="ml-2 btn btn-danger" onClick={onClose}>
-              Hủy
-            </button>
-          </div>
-          <div className="popup-column">
-            <div className="space-popup">
-              <label>Ngày nhập:</label>
-              <input type="text" placeholder="Ngày nhập" />
-            </div>
-            <div className="space-popup">
-              <label>Bộ phận quản lý:</label>
-              <input type="text" placeholder="Nhập bộ phận quản lý" />
-            </div>
-            <button className="btn btn-primary">Thêm</button>
-          </div>
+          </form>
         </div>
       </div>
     </div>

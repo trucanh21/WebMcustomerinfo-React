@@ -3,7 +3,17 @@ import axios from 'axios';
 const API_BASE_URL = 'http://localhost:3000/api/contacts/';
 const ADDRESS_API_BASE_URL = 'http://localhost:3000/api';
 
+// ----------------------- API PRODUCT --------------------
 
+export const fetchProducts = async () => {
+  try {
+    const response = await axios.get(`${ADDRESS_API_BASE_URL}/product`);
+    return response.data.products;
+  } catch (error) {
+    console.error('Error fetching products', error);
+    throw error;
+  }
+};
 // ----------------------- API CUSTOMER --------------------
 export const fetchCustomers = async () => {
   try {
@@ -75,4 +85,24 @@ export const fetchWardsByDistrict = async (districtId) => {
   }
 };
 
-// ----------------------- API PRODUCT --------------------
+
+
+export const addProduct = async (product) => {
+  try {
+    const response = await axios.post(`${ADDRESS_API_BASE_URL}/product`, product);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding product', error);
+    throw error;
+  }
+};
+
+export const updateProduct = async (id, product) => {
+  try {
+    const response = await axios.put(`${ADDRESS_API_BASE_URL}/product/${id}`, product);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating product', error);
+    throw error;
+  }
+};

@@ -62,6 +62,11 @@ CREATE TABLE SanPham (
   SP_BPQuanLy VARCHAR(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
+INSERT INTO SanPham (SP_Ten, SP_NgayNhap, SP_BPQuanLy) VALUES 
+('Kinh phí Nâng cấp phần mềm KTHC', '30-06-2024', 'Văn Phòng 1'),
+('Kinh phí Chuyển giao phần mềm Kế toán Hành chính Sự nghiệp (KTHC)', '30-06-2024', 'Văn Phòng 1'),
+('Kinh phí Bảo trì phần mềm KTHC', '30-06-2024', 'Văn Phòng 2');
+
 -- Create HopDong table
 CREATE TABLE HopDong (
   HD_ID INT PRIMARY KEY AUTO_INCREMENT,
