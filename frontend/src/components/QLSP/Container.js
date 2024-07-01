@@ -3,11 +3,13 @@ import '../../assets/css/Container.css';
 import '../../assets/css/Popup.css';
 import Popup from 'reactjs-popup';
 import PopupContent from '../../components/QLSP/PopupContent'; 
-// import PopupDelete from '../../components/QLSP/PopupDelete';
+import PopupEdit from '../../components/QLSP/PopupEdit'; 
 import { fetchProducts } from '../../features/apiCalls';
 
 const Container = () => {
   const [products, setProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null); 
+  const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -21,6 +23,16 @@ const Container = () => {
 
     getProducts();
   }, []);
+
+  const handleEditClick = (product) => {
+    setSelectedProduct(product); // Set the selected product
+    setIsEditPopupOpen(true);
+  };
+
+  const closeEditPopup = () => {
+    setIsEditPopupOpen(false);
+    setSelectedProduct(null);
+  };
 
   return (
     <div className="container">
@@ -59,7 +71,7 @@ const Container = () => {
                     <td>{product.SP_NgayNhap}</td>
                     <td>{product.SP_BPQuanLy}</td>
                     <td>
-                      <ion-icon name="create"></ion-icon>
+                      <ion-icon name="create" onClick={() => handleEditClick(product)}></ion-icon>
                     </td>
                   </tr>
                 ))}
@@ -68,6 +80,11 @@ const Container = () => {
           </div>
         </div>
       </div>
+      {isEditPopupOpen && (
+        <Popup open={isEditPopupOpen} onClose={closeEditPopup} modal nested>
+          {close => <PopupEdit onClose={closeEditPopup} product={selectedProduct} />}
+        </Popup>
+      )}
     </div>
   );
 };

@@ -38,6 +38,9 @@ CREATE TABLE QuanTri (
   FOREIGN KEY (wards_id) REFERENCES wards(wards_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
+INSERT INTO QuanTri (QT_Ten, QT_PhanCap, province_id, district_id, wards_id) VALUES 
+('Lan123', '1', '49', '544', '8516');
+
 -- Create KhachHang table
 CREATE TABLE KhachHang (
   KH_ID INT PRIMARY KEY AUTO_INCREMENT,
@@ -67,22 +70,33 @@ INSERT INTO SanPham (SP_Ten, SP_NgayNhap, SP_BPQuanLy) VALUES
 ('Kinh phí Chuyển giao phần mềm Kế toán Hành chính Sự nghiệp (KTHC)', '30-06-2024', 'Văn Phòng 1'),
 ('Kinh phí Bảo trì phần mềm KTHC', '30-06-2024', 'Văn Phòng 2');
 
+CREATE TABLE LoaiHopDong(
+  LHD_ID INT PRIMARY KEY AUTO_INCREMENT,
+  LHD_NAME VARCHAR(40)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+INSERT INTO LoaiHopDong (LHD_NAME) VALUES ('Chuyển Giao'), ('Nâng Cấp'), ('Bảo trì');
+
 -- Create HopDong table
 CREATE TABLE HopDong (
   HD_ID INT PRIMARY KEY AUTO_INCREMENT,
   QT_ID INT,
   KH_ID INT,
   SP_ID INT,
-  HD_Loai VARCHAR(100) NOT NULL,
+  LHD_ID INT,
   HD_Ngay DATE NOT NULL,
   HD_GiaTri INT,
   HD_CBGhiNhanDoanhSo VARCHAR(100), -- Tên quản trị
   HD_HienTrang VARCHAR(100) NOT NULL,
   HD_Note VARCHAR(100),
+  FOREIGN KEY (LHD_ID) REFERENCES LoaiHopDong(LHD_ID),
   FOREIGN KEY (KH_ID) REFERENCES KhachHang(KH_ID),
   FOREIGN KEY (QT_ID) REFERENCES QuanTri(QT_ID), 
   FOREIGN KEY (SP_ID) REFERENCES SanPham(SP_ID)
+
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+INSERT INTO HopDong (QT_ID, KH_ID, SP_ID, LHD_ID, HD_Ngay, HD_GiaTri, HD_CBGhiNhanDoanhSo, HD_HienTrang, HD_Note) VALUES 
+('1', '1', '1','1', '2024-1-1', '5000000', 'admin1', 'Chưa xuất hóa đơn', "");
 
 -- Create BaoTri table
 CREATE TABLE BaoTri (
@@ -108,6 +122,3 @@ CREATE TABLE HoaDon (
   HoaD_NgayThanhToan DATE NOT NULL,
   FOREIGN KEY (HD_ID) REFERENCES HopDong(HD_ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
-
-
-

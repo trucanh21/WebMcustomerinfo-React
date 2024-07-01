@@ -6,8 +6,5 @@ router
     .route('/')
     .get(contractController.getContractsByFilter)
     .post(contractController.createContract);
-router
-    .route('/:id')
-    .put(contractController.updateContract);
 
 module.exports = router;

@@ -14,6 +14,26 @@ export const fetchProducts = async () => {
     throw error;
   }
 };
+
+export const addProduct = async (product) => {
+  try {
+    const response = await axios.post(`${ADDRESS_API_BASE_URL}/product`, product);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding product', error);
+    throw error;
+  }
+};
+
+export const updateProduct = async (id, product) => {
+  try {
+    const response = await axios.put(`${ADDRESS_API_BASE_URL}/product/${id}`, product);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating product', error);
+    throw error;
+  }
+};
 // ----------------------- API CUSTOMER --------------------
 export const fetchCustomers = async () => {
   try {
@@ -85,24 +105,24 @@ export const fetchWardsByDistrict = async (districtId) => {
   }
 };
 
+// API CALL Quản lý bảo hành
 
-
-export const addProduct = async (product) => {
+export const fetchContract = async () => {
   try {
-    const response = await axios.post(`${ADDRESS_API_BASE_URL}/product`, product);
-    return response.data;
+    const response = await axios.get(`${ADDRESS_API_BASE_URL}/contract`);
+    return response.data.contracts;
   } catch (error) {
-    console.error('Error adding product', error);
+    console.error('Error fetching contracts', error);
     throw error;
   }
 };
 
-export const updateProduct = async (id, product) => {
+export const addContract = async (contract) => {
   try {
-    const response = await axios.put(`${ADDRESS_API_BASE_URL}/product/${id}`, product);
+    const response = await axios.post(`${ADDRESS_API_BASE_URL}/contract`, contract);
     return response.data;
   } catch (error) {
-    console.error('Error updating product', error);
+    console.error('Error adding contract', error);
     throw error;
   }
 };
