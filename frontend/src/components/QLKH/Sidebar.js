@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../../assets/css/Sidebar.css';
 
-//import link img 
+// Import images
 import LogoDTSoft from '../../assets/img/LogoDTSoft.png';
 import iconQLSP from '../../assets/img/icon/gift.png';
 import iconQLBH from '../../assets/img/icon/contract.png';
 import iconQLHD from '../../assets/img/icon/payment.png';
 import iconQLBT from '../../assets/img/icon/work.png';
 
-
 const Sidebar = () => {
   useEffect(() => {
-    // Tạo một <script> element
+    // Create <script> elements
     const script1 = document.createElement('script');
     script1.type = 'module';
     script1.src = 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js';
@@ -22,11 +22,11 @@ const Sidebar = () => {
     script2.src = 'https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js';
     script2.async = true;
 
-    // Chèn các <script> vào <head> của trang
+    // Append <script> elements to <head>
     document.head.appendChild(script1);
     document.head.appendChild(script2);
 
-    // Cleanup: Xóa các <script> khi component unmount
+    // Cleanup: Remove <script> elements when component unmounts
     return () => {
       document.head.removeChild(script1);
       document.head.removeChild(script2);
@@ -36,52 +36,52 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-logo">
-        <a href="index.html" className="logo">
+        <Link to="/" className="logo">
           <img
             src={LogoDTSoft}
             alt="navbar brand"
             className="navbar-brand"
             height="70"
           />
-        </a>
+        </Link>
       </div>
       <div className="sidebar-content">
         <ul className="nav nav-secondary">
           <li className="nav-item active">
-            <a href="">
+            <Link to="/">
               <ion-icon name="home-outline"></ion-icon>
               <p className="header-menu">Trang chủ</p>
-            </a>
+            </Link>
           </li>
           <li className="nav-item active">
-            <a href="" className='choose-menu'>
+            <Link to="/QLKH" className='choose-menu'>
               <ion-icon name="people-outline"></ion-icon>
               <p className="header-menu">Quản lý khách hàng</p>
-            </a>
+            </Link>
           </li>
           <li className="nav-item active">
-            <a href="">
+            <Link to="/QLSP">
               <img src={iconQLSP} className="icon-sidebar" />
               <p className="header-menu">Quản lý sản phẩm</p>
-            </a>
+            </Link>
           </li>
           <li className="nav-item active">
-            <a href="">
+            <Link to="/QLBH">
               <img src={iconQLBH} className="icon-sidebar" />
               <p className="header-menu">Quản lý bảo hành</p>
-            </a>
+            </Link>
           </li>
           <li className="nav-item active">
-            <a href="">
+            <Link to="/QLHD">
               <img src={iconQLHD} className="icon-sidebar" />
               <p className="header-menu">Quản lý hóa đơn</p>
-            </a>
+            </Link>
           </li>
           <li className="nav-item active">
-            <a href="">
+            <Link to="/QLBT">
               <img src={iconQLBT} className="icon-sidebar" />
               <p className="header-menu">Quản lý bảo trì</p>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
