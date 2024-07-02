@@ -88,6 +88,37 @@ form h2 {
 .login-form button[type="submit"]:hover {
     background-color: #1349af;
 }
+
+/* Đặt kiểu cho các input theo chiều ngang */
+.location-fields {
+    display: flex;
+    justify-content: space-between;
+}
+
+.location-fields div {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.location-fields div:last-child {
+    margin-right: 0;
+}
+
+
+/* Kiểu riêng cho trang đăng nhập */
+.login-form {
+    background-color: #f0f0f0; /* Màu nền nhạt hơn cho trang đăng nhập */
+}
+
+/* Đặt kiểu cho button trong trang đăng nhập */
+.login-form button[type="submit"] {
+    background-color: #0149CD; /* Màu xanh đậm cho nút đăng ký */
+    /* Màu cam cho nút đăng nhập */
+}
+
+.login-form button[type="submit"]:hover {
+    background-color: #1349af;
+}
 /* .login-form h1 {
     text-align: center;
     margin-bottom: 40px;

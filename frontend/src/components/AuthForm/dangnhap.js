@@ -17,7 +17,7 @@ const LoginForm = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Xử lý gửi dữ liệu formData
+        // Handle formData submission
         console.log(formData);
     };
 
@@ -25,7 +25,7 @@ const LoginForm = () => {
         <div className="login-container">
             <h1>Đăng Nhập</h1>
             <form className="login-form" onSubmit={handleSubmit}>
-                <h2>Đăng nhập</h2>
+                
                 <div>
                     <label>Tên đăng nhập:</label>
                     <input
@@ -48,6 +48,9 @@ const LoginForm = () => {
                 </div>
                 <button type="submit">Đăng nhập</button>
             </form>
+            <div className="register-link">
+                Bạn chưa có tài khoản? <a href="/register">Đăng ký</a>
+            </div>
             <style jsx>{`
                 h1 {
                     margin-bottom: 30px;
@@ -55,6 +58,18 @@ const LoginForm = () => {
                     font-size: 32px;
                     text-align: center;
                     color: #333;
+                }
+                .register-link {
+                    text-align: center;
+                    margin-top: 20px;
+                    font-size: 14px;
+                }
+                .register-link a {
+                    color: #0149CD;
+                    text-decoration: none;
+                }
+                .register-link a:hover {
+                    text-decoration: underline;
                 }
             `}</style>
         </div>

@@ -7,8 +7,8 @@ function App() {
   return (
     <div className="test">
       {/* <QLKH/> */}
-      <RegistrationForm/>
-      {/* <LoginForm/> */}
+      {/* <RegistrationForm/> */}
+      <LoginForm/>
     </div>
   );
 }
