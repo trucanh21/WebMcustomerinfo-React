@@ -117,7 +117,7 @@ h3 {
 
 .button-popup {
     display: flex;
-    flex-direction: row-reverse;
+    justify-content: end;
 }
 
 

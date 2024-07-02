@@ -89,40 +89,42 @@ const PopupShow = ({ onClose }) => {
           <ion-icon name="close" className="close" onClick={onClose}></ion-icon>
         </div>
         <div className="popup-body">
-          <form onSubmit={handleSubmit}>
-            <div className="popup-column">
-              <div className="space-popup">
-                <label>Tên đơn vị:</label>
-                <input type="text" name="KH_Ten" placeholder="Nhập tên đơn vị" value={formData.KH_Ten} onChange={handleInputChange} />
+          <form onSubmit={handleSubmit} >
+            <div className='test'>
+              <div className="popup-column column1">
+                <div className="space-popup">
+                  <label>Tên đơn vị:</label>
+                  <input type="text" name="KH_Ten" placeholder="Nhập tên đơn vị" value={formData.KH_Ten} onChange={handleInputChange} />
+                </div>
+                <div className="space-popup">
+                  <label>Đại diện:</label>
+                  <input type="text" name="KH_DaiDien" placeholder="Nhập đại diện" value={formData.KH_DaiDien} onChange={handleInputChange} />
+                </div>
+                <div className="space-popup">
+                  <label>Điện thoại:</label>
+                  <input type="text" name="KH_SDT" placeholder="Nhập số điện thoại" value={formData.KH_SDT} onChange={handleInputChange} />
+                </div>
               </div>
-              <div className="space-popup">
-                <label>Đại diện:</label>
-                <input type="text" name="KH_DaiDien" placeholder="Nhập đại diện" value={formData.KH_DaiDien} onChange={handleInputChange} />
+              <div className="popup-column">
+                <div className="space-popup">
+                  <label>Phân loại đơn vị:</label>
+                  <select name="KH_PLDonVi" value={formData.KH_PLDonVi} onChange={handleInputChange}>
+                    <option>Giáo dục</option>
+                    <option>Y tế</option>
+                    <option>Tư pháp</option>
+                    <option>Hành chính</option>
+                  </select>
+                </div>
+                <div className="space-popup">
+                  <label>Bộ phận quản lý:</label>
+                  <input type="text" name="KH_BPQuanLy" placeholder="Nhập bộ phận quản lý" value={formData.KH_BPQuanLy} onChange={handleInputChange} />
+                </div>
+                <div className="space-popup">
+                  <label>Tài khoản:</label>
+                  <input type="text" name="KH_TaiKhoan" placeholder="Nhập tài khoản" value={formData.KH_TaiKhoan} onChange={handleInputChange} />
+                </div>
               </div>
-              <div className="space-popup">
-                <label>Điện thoại:</label>
-                <input type="text" name="KH_SDT" placeholder="Nhập số điện thoại" value={formData.KH_SDT} onChange={handleInputChange} />
               </div>
-            </div>
-            <div className="popup-column">
-              <div className="space-popup">
-                <label>Phân loại đơn vị:</label>
-                <select name="KH_PLDonVi" value={formData.KH_PLDonVi} onChange={handleInputChange}>
-                  <option>Giáo dục</option>
-                  <option>Y tế</option>
-                  <option>Tư pháp</option>
-                  <option>Hành chính</option>
-                </select>
-              </div>
-              <div className="space-popup">
-                <label>Bộ phận quản lý:</label>
-                <input type="text" name="KH_BPQuanLy" placeholder="Nhập bộ phận quản lý" value={formData.KH_BPQuanLy} onChange={handleInputChange} />
-              </div>
-              <div className="space-popup">
-                <label>Tài khoản:</label>
-                <input type="text" name="KH_TaiKhoan" placeholder="Nhập tài khoản" value={formData.KH_TaiKhoan} onChange={handleInputChange} />
-              </div>
-            </div>
             <div className='GroupProvince'>
               <div className="space-popup">
                 <label>Tỉnh thành phố:</label>

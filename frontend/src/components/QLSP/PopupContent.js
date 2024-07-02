@@ -39,6 +39,7 @@ const PopupShow = ({ onClose }) => {
                 <label>Tên sản phẩm:</label>
                 <input
                   type="text"
+                  className='sanpham'
                   name="SP_Ten"
                   placeholder="Nhập tên sản phẩm"
                   value={formData.SP_Ten}
@@ -50,6 +51,7 @@ const PopupShow = ({ onClose }) => {
                 <label>Ngày nhập:</label>
                 <input
                   type="date"
+                  className='sanpham'
                   name="SP_NgayNhap"
                   placeholder="Ngày nhập"
                   value={formData.SP_NgayNhap}
@@ -57,9 +59,6 @@ const PopupShow = ({ onClose }) => {
                   required
                 />
               </div>
-              <button type="button" className="ml-2 btn btn-danger" onClick={onClose}>
-                Hủy
-              </button>
             </div>
             <div className="popup-column">
               <div className="space-popup">
@@ -67,14 +66,18 @@ const PopupShow = ({ onClose }) => {
                 <input
                   type="text"
                   name="SP_BPQuanLy"
+                  className='sanpham'
                   placeholder="Nhập bộ phận quản lý"
                   value={formData.SP_BPQuanLy}
                   onChange={handleChange}
                   required
                 />
               </div>
-              <button type="submit" className="btn btn-primary">
-                Thêm
+            </div>
+            <div className='button-popup'>
+              <button type="submit" className="btn btn-primary">Thêm</button>
+              <button type="button" className="ml-2 btn btn-danger" onClick={onClose}>
+                Hủy
               </button>
             </div>
           </form>

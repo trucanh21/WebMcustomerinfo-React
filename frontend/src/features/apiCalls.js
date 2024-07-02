@@ -126,3 +126,13 @@ export const addContract = async (contract) => {
     throw error;
   }
 };
+
+export const fetchTypeContract = async () => {
+  try {
+    const response = await axios.get(`${ADDRESS_API_BASE_URL}/typecontract`);
+    return response.data.typeContracts;
+  } catch (error) {
+    console.error('Error fetching typeContracts', error);
+    throw error;
+  }
+};
