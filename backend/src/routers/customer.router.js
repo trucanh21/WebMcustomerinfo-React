@@ -6,13 +6,8 @@ const router = express.Router();
 router
     .route('/')
     .get(contactsController.getCustomersByFilter)
-    .post(contactsController.createCustomer)
-    .delete(contactsController.deleteAllCustomer)
-    // .all(methodNotAllowed);
+    .post(contactsController.createCustomer);
 router
     .route('/:id')
-    .get(contactsController.getCustomer)
-    .put(contactsController.updateCustomer)
-    .delete(contactsController.deleteCustomer)
-    // .all(methodNotAllowed);
+    .put(contactsController.updateContact);
 module.exports = router;
