@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { fetchProvinces, fetchDistrictsByProvince, fetchWardsByDistrict, addCustomer } from '../../features/apiCalls';
+import { fetchProvinces, fetchDistrictsByProvince, fetchWardsByDistrict, updateCustomer } from '../../features/apiCalls';
 import '../../assets/css/Popup.css';
 
-const PopupShow = ({ onClose }) => {
+const PopupEdit = ({ onClose, customer }) => {
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
-  const [selectedProvince, setSelectedProvince] = useState('');
-  const [selectedDistrict, setSelectedDistrict] = useState('');
-  const [selectedWard, setSelectedWard] = useState('');
+  const [selectedProvinceId, setSelectedProvinceId] = useState(customer.KH_ProvinceID || '');
+  const [selectedDistrictId, setSelectedDistrictId] = useState(customer.KH_DistrictID || '');
+  const [selectedWardId, setSelectedWardId] = useState(customer.KH_WardsID || '');
   const [formData, setFormData] = useState({
-    KH_Ten: '',
-    KH_DaiDien: '',
-    KH_SDT: '',
-    KH_TaiKhoan: '',
-    KH_PLDonVi: '',
-    KH_BPQuanLy: '',
+    KH_Ten: customer.KH_Ten,
+    KH_DaiDien: customer.KH_DaiDien,
+    KH_SDT: customer.KH_SDT,
+    KH_TaiKhoan: customer.KH_TaiKhoan,
+    KH_PLDonVi: customer.KH_PLDonVi,
+    KH_BPQuanLy: customer.KH_BPQuanLy,
   });
 
   useEffect(() => {
@@ -29,35 +29,29 @@ const PopupShow = ({ onClose }) => {
   }, []);
 
   useEffect(() => {
-    if (selectedProvince) {
-      const province = provinces.find(prov => prov.name === selectedProvince);
-      if (province) {
-        fetchDistrictsByProvince(province.province_id)
-          .then(data => {
-            setDistricts(data);
-            setWards([]);
-          })
-          .catch(error => {
-            console.error('There was an error fetching the districts!', error);
-          });
-      }
+    if (selectedProvinceId) {
+      fetchDistrictsByProvince(selectedProvinceId)
+        .then(data => {
+          setDistricts(data);
+          setWards([]);
+        })
+        .catch(error => {
+          console.error('There was an error fetching the districts!', error);
+        });
     }
-  }, [selectedProvince, provinces]);
+  }, [selectedProvinceId]);
 
   useEffect(() => {
-    if (selectedDistrict) {
-      const district = districts.find(dist => dist.name === selectedDistrict);
-      if (district) {
-        fetchWardsByDistrict(district.district_id)
-          .then(data => {
-            setWards(data);
-          })
-          .catch(error => {
-            console.error('There was an error fetching the wards!', error);
-          });
-      }
+    if (selectedDistrictId) {
+      fetchWardsByDistrict(selectedDistrictId)
+        .then(data => {
+          setWards(data);
+        })
+        .catch(error => {
+          console.error('There was an error fetching the wards!', error);
+        });
     }
-  }, [selectedDistrict, districts]);
+  }, [selectedDistrictId]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -68,16 +62,18 @@ const PopupShow = ({ onClose }) => {
     e.preventDefault();
     const customerData = {
       ...formData,
-      KH_DiaChi: `${selectedWard} - ${selectedDistrict} - ${selectedProvince}`
+      KH_ProvinceID: selectedProvinceId,
+      KH_DistrictID: selectedDistrictId,
+      KH_WardsID: selectedWardId,
     };
 
-    addCustomer(customerData)
+    updateCustomer(customer.KH_ID, customerData)
       .then(response => {
-        console.log('Customer added successfully', response);
+        console.log('Customer updated successfully', response);
         onClose();
       })
       .catch(error => {
-        console.error('There was an error adding the customer!', error);
+        console.error('There was an error updating the customer!', error);
       });
   };
 
@@ -85,7 +81,7 @@ const PopupShow = ({ onClose }) => {
     <div className="popup">
       <div className="popup-content">
         <div className="popup-header">
-          <h2>Thêm khách hàng</h2>
+          <h2>Sửa khách hàng</h2>
           <ion-icon name="close" className="close" onClick={onClose}></ion-icon>
         </div>
         <div className="popup-body">
@@ -126,10 +122,10 @@ const PopupShow = ({ onClose }) => {
             <div className='GroupProvince'>
               <div className="space-popup">
                 <label>Tỉnh thành phố:</label>
-                <select className='province' value={selectedProvince} onChange={e => setSelectedProvince(e.target.value)}>
+                <select className='province' value={selectedProvinceId} onChange={e => setSelectedProvinceId(e.target.value)}>
                   <option value=''>Chọn tỉnh thành</option>
                   {provinces.map(province => (
-                    <option key={province.province_id} value={province.name}>
+                    <option key={province.province_id} value={province.province_id}>
                       {province.name}
                     </option>
                   ))}
@@ -137,10 +133,10 @@ const PopupShow = ({ onClose }) => {
               </div>
               <div className="space-popup">
                 <label>Quận Huyện:</label>
-                <select className='districts' value={selectedDistrict} onChange={e => setSelectedDistrict(e.target.value)} disabled={!selectedProvince}>
+                <select className='districts' value={selectedDistrictId} onChange={e => setSelectedDistrictId(e.target.value)} disabled={!selectedProvinceId}>
                   <option value=''>Chọn quận huyện</option>
                   {districts.map(district => (
-                    <option key={district.district_id} value={district.name}>
+                    <option key={district.district_id} value={district.district_id}>
                       {district.name}
                     </option>
                   ))}
@@ -148,10 +144,10 @@ const PopupShow = ({ onClose }) => {
               </div>
               <div className="space-popup">
                 <label>Phường Xã:</label>
-                <select className='wards' value={selectedWard} onChange={e => setSelectedWard(e.target.value)} disabled={!selectedDistrict}>
+                <select className='wards' value={selectedWardId} onChange={e => setSelectedWardId(e.target.value)} disabled={!selectedDistrictId}>
                   <option value=''>Chọn phường xã</option>
                   {wards.map(ward => (
-                    <option key={ward.wards_id} value={ward.name}>
+                    <option key={ward.wards_id} value={ward.wards_id}>
                       {ward.name}
                     </option>
                   ))}
@@ -159,7 +155,7 @@ const PopupShow = ({ onClose }) => {
               </div>
             </div>
             <div className='button-popup'>
-              <button type="submit" className="btn btn-primary">Thêm</button>
+              <button type="submit" className="btn btn-primary">Sửa</button>
               <button type="button" className="ml-2 btn btn-danger" onClick={onClose}>
                 Hủy
               </button>
@@ -171,4 +167,4 @@ const PopupShow = ({ onClose }) => {
   );
 };
 
-export default PopupShow;
+export default PopupEdit;

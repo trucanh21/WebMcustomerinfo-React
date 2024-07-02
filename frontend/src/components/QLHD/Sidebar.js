@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import '../../assets/css/Sidebar.css';
+import { Link } from 'react-router-dom';
 
 //import link img 
 import LogoDTSoft from '../../assets/img/LogoDTSoft.png';
@@ -55,7 +55,7 @@ const Sidebar = () => {
             </a>
           </li>
           <li className="nav-item active">
-            <Link to="/qlkh" className='choose-menu'>
+            <Link to="/qlkh">
               <ion-icon name="people-outline"></ion-icon>
               <p className="header-menu">Quản lý khách hàng</p>
             </Link>
@@ -73,7 +73,7 @@ const Sidebar = () => {
             </Link>
           </li>
           <li className="nav-item active">
-            <Link to="/qlhd">
+            <Link to="/qlhd" className='choose-menu'>
               <img src={iconQLHD} className="icon-sidebar" />
               <p className="header-menu">Quản lý hóa đơn</p>
             </Link>
