@@ -4,12 +4,13 @@ import '../../assets/css/Popup.css';
 import Popup from 'reactjs-popup';
 import PopupContent from '../../components/QLKH/PopupContent'; 
 import PopupEdit from '../../components/QLKH/PopupEdit';
-// import PopupDelete from '../../components/QLKH/PopupDelete';
 import { fetchCustomers } from '../../features/apiCalls';
+import MainHeader from './MainHeader';
 
-const Container = () => {
+const Container = ({ searchTerm }) => { // Nhận searchTerm từ prop
   const [customers, setCustomers] = useState([]);
-  const [selectedCustomer, setSelectedCustomer] = useState(null); // State to hold selected customer
+  const [filteredCustomers, setFilteredCustomers] = useState([]);
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
   const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
 
   useEffect(() => {
@@ -17,6 +18,7 @@ const Container = () => {
       try {
         const customersData = await fetchCustomers();
         setCustomers(customersData);
+        setFilteredCustomers(customersData);
       } catch (error) {
         console.error('Error fetching customers', error);
       }
@@ -25,8 +27,21 @@ const Container = () => {
     getCustomers();
   }, []);
 
+  useEffect(() => {
+    if (searchTerm) {
+      const lowercasedTerm = searchTerm.toLowerCase();
+      const filtered = customers.filter(customer =>
+        customer.KH_ID.toString().includes(lowercasedTerm) ||
+        customer.KH_Ten.toLowerCase().includes(lowercasedTerm)
+      );
+      setFilteredCustomers(filtered);
+    } else {
+      setFilteredCustomers(customers);
+    }
+  }, [searchTerm, customers]);
+
   const handleEditClick = (customer) => {
-    setSelectedCustomer(customer); // Set the selected customer
+    setSelectedCustomer(customer);
     setIsEditPopupOpen(true);
   };
 
@@ -37,6 +52,7 @@ const Container = () => {
 
   return (
     <div className="container">
+     
       <div className="page-inner">
         <div className="page-header">
           <h3>Quản lý khách hàng</h3>
@@ -74,7 +90,7 @@ const Container = () => {
                 </tr>
               </thead>
               <tbody>
-                {customers.map((customer) => (
+                {filteredCustomers.map((customer) => (
                   <tr key={customer.KH_ID}>
                     <td>{customer.KH_ID}</td>
                     <td>{customer.KH_Ten}</td>
