@@ -9,7 +9,6 @@ function makeContractService() {
             LHD_ID: payload.LHD_ID,
             HD_Ngay: payload.HD_Ngay,
             HD_GiaTri: payload.HD_GiaTri,
-            HD_CBGhiNhanDoanhSo: payload.HD_CBGhiNhanDoanhSo,
             HD_HienTrang: payload.HD_HienTrang,
             HD_Note: payload.HD_Note,
         };
@@ -38,7 +37,6 @@ function makeContractService() {
                 'HopDong.LHD_ID',
                 'HopDong.HD_Ngay',
                 'HopDong.HD_GiaTri',
-                'HopDong.HD_CBGhiNhanDoanhSo',
                 'HopDong.HD_HienTrang',
                 'HopDong.HD_Note',
                 'SanPham.SP_BPQuanLy',

@@ -15,7 +15,6 @@ const PopupShow = ({ onClose }) => {
     KH_SDT: '',
     KH_TaiKhoan: '',
     KH_PLDonVi: '',
-    KH_BPQuanLy: '',
   });
 
   useEffect(() => {
@@ -30,34 +29,39 @@ const PopupShow = ({ onClose }) => {
 
   useEffect(() => {
     if (selectedProvince) {
-      const province = provinces.find(prov => prov.name === selectedProvince);
-      if (province) {
-        fetchDistrictsByProvince(province.province_id)
-          .then(data => {
-            setDistricts(data);
-            setWards([]);
-          })
-          .catch(error => {
-            console.error('There was an error fetching the districts!', error);
-          });
-      }
+      fetchDistrictsByProvince(selectedProvince)
+        .then(data => {
+          setDistricts(data);
+          setWards([]);
+          setSelectedDistrict('');
+          setSelectedWard('');
+        })
+        .catch(error => {
+          console.error('There was an error fetching the districts!', error);
+        });
+    } else {
+      setDistricts([]);
+      setWards([]);
+      setSelectedDistrict('');
+      setSelectedWard('');
     }
-  }, [selectedProvince, provinces]);
+  }, [selectedProvince]);
 
   useEffect(() => {
     if (selectedDistrict) {
-      const district = districts.find(dist => dist.name === selectedDistrict);
-      if (district) {
-        fetchWardsByDistrict(district.district_id)
-          .then(data => {
-            setWards(data);
-          })
-          .catch(error => {
-            console.error('There was an error fetching the wards!', error);
-          });
-      }
+      fetchWardsByDistrict(selectedDistrict)
+        .then(data => {
+          setWards(data);
+          setSelectedWard('');
+        })
+        .catch(error => {
+          console.error('There was an error fetching the wards!', error);
+        });
+    } else {
+      setWards([]);
+      setSelectedWard('');
     }
-  }, [selectedDistrict, districts]);
+  }, [selectedDistrict]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -68,6 +72,9 @@ const PopupShow = ({ onClose }) => {
     e.preventDefault();
     const customerData = {
       ...formData,
+      KH_ProvinceID: selectedProvince,
+      KH_DistrictID: selectedDistrict,
+      KH_WardsID: selectedWard,
       KH_DiaChi: `${selectedWard} - ${selectedDistrict} - ${selectedProvince}`
     };
 
@@ -116,10 +123,6 @@ const PopupShow = ({ onClose }) => {
                   </select>
                 </div>
                 <div className="space-popup">
-                  <label>Bộ phận quản lý:</label>
-                  <input type="text" name="KH_BPQuanLy" placeholder="Nhập bộ phận quản lý" value={formData.KH_BPQuanLy} onChange={handleInputChange} />
-                </div>
-                <div className="space-popup">
                   <label>Tài khoản:</label>
                   <input type="text" name="KH_TaiKhoan" placeholder="Nhập tài khoản" value={formData.KH_TaiKhoan} onChange={handleInputChange} />
                 </div>
@@ -131,7 +134,7 @@ const PopupShow = ({ onClose }) => {
                 <select className='province' value={selectedProvince} onChange={e => setSelectedProvince(e.target.value)}>
                   <option value=''>Chọn tỉnh thành</option>
                   {provinces.map(province => (
-                    <option key={province.province_id} value={province.name}>
+                    <option key={province.province_id} value={province.province_id}>
                       {province.name}
                     </option>
                   ))}
@@ -142,7 +145,7 @@ const PopupShow = ({ onClose }) => {
                 <select className='districts' value={selectedDistrict} onChange={e => setSelectedDistrict(e.target.value)} disabled={!selectedProvince}>
                   <option value=''>Chọn quận huyện</option>
                   {districts.map(district => (
-                    <option key={district.district_id} value={district.name}>
+                    <option key={district.district_id} value={district.district_id}>
                       {district.name}
                     </option>
                   ))}
@@ -153,7 +156,7 @@ const PopupShow = ({ onClose }) => {
                 <select className='wards' value={selectedWard} onChange={e => setSelectedWard(e.target.value)} disabled={!selectedDistrict}>
                   <option value=''>Chọn phường xã</option>
                   {wards.map(ward => (
-                    <option key={ward.wards_id} value={ward.name}>
+                    <option key={ward.wards_id} value={ward.wards_id}>
                       {ward.name}
                     </option>
                   ))}

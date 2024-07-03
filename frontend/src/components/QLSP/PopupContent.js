@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import '../../assets/css/Popup.css';
-import { addProduct } from '../../features/apiCalls';
+  import { addProduct } from '../../features/apiCalls';
 
-const PopupShow = ({ onClose }) => {
+  const PopupShow = ({ onClose }) => {
   const [formData, setFormData] = useState({
     SP_Ten: '',
     SP_NgayNhap: '',

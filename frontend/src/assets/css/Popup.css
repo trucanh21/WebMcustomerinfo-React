@@ -35,11 +35,22 @@
     /* flex-direction: column; */
 }
 
+.btn:focus {
+    outline: none;
+    /* Loại bỏ viền khi nút được focus */
+}
+
+.btn-primary:hover,
+.btn-danger:hover {
+    opacity: 0.7; 
+    /* Độ mờ khi nút được focus */
+}
+
 input,
 select {
     padding: 10px;
     font-size: 16px;
-    width: 100%;
+    width: 300px;
     /* Make inputs take the full width of their container */
     box-sizing: border-box;
     /* Ensure padding is included in the total width */
@@ -93,4 +104,39 @@ label {
 }
 .test {
     display: flex;
+}
+
+.label-note {
+    font-weight: 600;
+    margin-top: 5px;
+}
+
+textarea {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    resize: vertical;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #0149CD;
+    box-shadow: 0 0 5px rgba(1, 73, 205, 0.5);
+}
+
+input[type="text"],
+select {
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+input[type="text"]:focus,
+select:focus {
+    outline: none;
+    border-color: #0149CD;
+    box-shadow: 0 0 5px rgba(1, 73, 205, 0.5);
 }

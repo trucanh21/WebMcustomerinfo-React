@@ -38,6 +38,40 @@ const Container = () => {
             </Popup>
           </div>
         </div>
+        <div className='filter'>
+          <form>
+          <div className='filter-contract'>
+            <p className='header-filter'>Khách hàng hết hạn bảo trì chưa ký hợp đồng:</p>
+              <div className='start space'>
+                <label>Từ ngày</label>
+                <input type='date' className='date_contract'></input>
+              </div>
+              <div className='end space'>
+                <label>Đến ngày</label>
+                <input type='date' className='date_contract'></input>
+              </div>
+              <div className='button-filter space'>
+                <button type="submit" className="btn_filter">Lọc</button>
+              </div>
+          </div>
+          </form>
+          <form>
+            <div className='filter-invoice'>
+              <p className='header-filter'>Khách hàng hết hạn bảo trì chưa ký hợp đồng:</p>
+              <div className='start space'>
+                <label>Từ ngày</label>
+                <input type='date' className='date_contract'></input>
+              </div>
+              <div className='end space'>
+                <label>Đến ngày</label>
+                <input type='date' className='date_contract'></input>
+              </div>
+              <div className='button-filter space'>
+                <button type="submit" className="btn_filter">Lọc</button>
+              </div>
+            </div>
+          </form>
+        </div>
         <div className="col-sm-12 sticky-table">
           <div className="table-container">
             <table className="styled-table">
@@ -66,10 +100,15 @@ const Container = () => {
                     <td>{contract.LHD_ID}</td>
                     <td>{contract.HD_GiaTri}</td>
                     <td>{contract.SP_BPQuanLy}</td>
-                    <td>{contract.HD_CBGhiNhanDoanhSo}</td>
+                    <td>{contract.QT_ID}</td>
                     <td>{contract.HD_HienTrang}</td>
                     <td>{contract.HD_Note}</td>
-                    <td><ion-icon name="create"></ion-icon></td>
+                    <td>
+                      <div className='group-container'>
+                        <ion-icon name="reader"></ion-icon>
+                        <ion-icon name="build"></ion-icon>
+                      </div>
+                    </td>
                   </tr>
                 ))}
               </tbody>

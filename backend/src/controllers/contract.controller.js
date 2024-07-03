@@ -1,7 +1,7 @@
 const makeContractService = require('../services/contract.services')
 
 async function createContract(req, res) {
-    if (!req.body?.HD_Loai) {
+    if (!req.body?.QT_ID) {
         return res.status(400).send({ message: 'Loại hợp đồng không được để trống' });
     }
 
