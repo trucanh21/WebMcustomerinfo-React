@@ -77,3 +77,23 @@
     flex-grow: 1;
     /* Để input chiếm toàn bộ không gian còn lại */
 }
+/* MainHeader.css */
+
+.dropdown-content button {
+    background-color: #ff0000; /* Green background */
+    color: white; /* White text */
+    padding: 8px 12px; /* Some padding */
+    text-align: center; /* Centered text */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Make the link block */
+    border: none; /* Remove border */
+    width: 100%; /* Full width */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+  }
+  
+  .dropdown-content button:hover {
+    background-color: #b91e1e; /* Darker green on hover */
+  }
+  

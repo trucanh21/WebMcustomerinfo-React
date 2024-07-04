@@ -1,7 +1,78 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../assets/css/Popup.css';
+import { fetchTypeContract, fetchProducts, fetchCustomers ,addContract } from '../../features/apiCalls';
 
-const PopupShow = ({ onClose  }) => {
+const PopupShow = ({ onClose }) => {
+  const [typeContracts, setTypeContracts] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [customers, setCustomers] = useState([]);
+  const [formData, setFormData] = useState({
+    QT_ID: '',
+    KH_ID: '',
+    SP_ID: '',
+    LHD_ID: '',
+    HD_Ngay: '',
+    HD_GiaTri: '',
+    HD_HienTrang: '',
+    HD_Note: '',
+  });
+
+  useEffect(() => {
+    const loadTypeContracts = async () => {
+      try {
+        const data = await fetchTypeContract();
+        setTypeContracts(data);
+      } catch (error) {
+        console.error('Error fetching type contracts:', error);
+      }
+    };
+
+    loadTypeContracts();
+  }, []);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      try {
+        const productsData = await fetchProducts();
+        setProducts(productsData);
+      } catch (error) {
+        console.error('Error fetching products', error); // Corrected the error message
+      }
+    };
+
+    getProducts();
+  }, []);
+
+  useEffect(() => {
+    const getCustomers = async () => {
+      try {
+        const customersData = await fetchCustomers();
+        setCustomers(customersData);
+      } catch (error) {
+        console.error('Error fetching customers', error);
+      }
+    };
+
+    getCustomers();
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await addContract(formData);
+      onClose(); // Close the popup on successful addition
+    } catch (error) {
+      console.error('Error adding contract', error);
+      // Handle error (e.g., display an error message to the user)
+    }
+  };
+
+
   return (
     <div className="popup">
       <div className="popup-content">
@@ -9,56 +80,71 @@ const PopupShow = ({ onClose  }) => {
           <h2>Thêm hợp đồng</h2>
           <ion-icon name="close" className="close" onClick={onClose}></ion-icon>
         </div>
+        <form onSubmit={handleSubmit} >
         <div className="popup-body">
-          <div className="popup-column">
+          <div className="popup-column column1">
             <div className="space-popup">
-              <label>Mã BH:</label>
-              <input type="text"/>
-            </div>
-            <div className="space-popup">
-              <label>Ngày nhập:</label>
-              <input type="text" placeholder="Nhập tên đơn vị" />
-            </div>
-            <div className="space-popup">
-              <label>Loại hợp đồng:</label>
-              <select>
-                <option>Chuyển giao</option>
-                <option>Nâng cấp</option>
-                <option>Bảo trì</option>
+              <label>Mã đơn vị:</label>
+              <select name="KH_ID" value={formData.KH_ID} onChange={handleInputChange}>
+                {customers.map((customer) => (
+                <option key={customer.KH_ID} value={customer.KH_ID}>
+                  {customer.KH_ID}
+                </option>
+                ))}
               </select>
             </div>
             <div className="space-popup">
-              <label>Bộ phận quản lý:</label>
-              <input type="text" placeholder="Nhập số điện thoại" />
+              <label>Ngày nhập:</label>
+              <input name="HD_Ngay" value={formData.HD_Ngay} type="date" onChange={handleInputChange}/>
             </div>
-            <button type="button" className="ml-2 btn btn-danger" onClick={onClose}>
-              Hủy
-            </button>
+            <div className="space-popup">
+              <label>Loại hợp đồng:</label>
+              <select name="LHD_ID" value={formData.LHD_ID} onChange={handleInputChange}>
+                {typeContracts.map((typeContract) => (
+                  <option key={typeContract.LHD_ID} value={typeContract.LHD_ID}>
+                    {typeContract.LHD_NAME}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="space-popup">
+              <label>Hiện trạng xuất hóa đơn:</label>
+              <select name='HD_HienTrang' value={formData.HD_HienTrang} onChange={handleInputChange}>
+                <option key="Chưa xuất hóa đơn" value="Chưa xuất hóa đơn">Chưa xuất hóa đơn</option>
+                <option key="Đã xuất hóa đơn" value="Đã xuất hóa đơn">Đã xuất hóa đơn</option>
+              </select>
+            </div>
           </div>
           <div className="popup-column">
             <div className="space-popup">
-              <label>Tên đơn vị:</label>
-              <input type="text" placeholder="Nhập tài khoản" />
-            </div>
-            <div className="space-popup">
               <label>Sản phẩm:</label>
-              <select>
-                <option>SP01</option>
-                <option>SP02</option>
-                <option>SP03</option>
+              <select name="SP_ID" value={formData.SP_ID} onChange={handleInputChange}>
+                {products.map((product) => (
+                <option key={product.SP_ID} value={product.SP_ID}>
+                  {product.SP_Ten}
+                </option>
+                ))}
               </select>
             </div>
             <div className="space-popup">
               <label>Giá trị hợp đồng:</label>
-              <input type="text" placeholder="Nhập bộ phận quản lý" />
+              <input className='sanpham' name='HD_GiaTri' value={formData.HD_GiaTri} type="text" placeholder="Nhập giá trị hợp đồng" onChange={handleInputChange} />
             </div>
             <div className="space-popup">
-              <label>Cán bộ ghi nhận:</label>
-              <input type="text" placeholder="Nhập địa chỉ" />
+              <label>Mã Cán bộ ghi nhận:</label>
+              <input className='sanpham' type="text" placeholder="Nhập mã cán bộ ghi nhận" name='QT_ID' value={formData.QT_ID} onChange={handleInputChange} />
             </div>
-            <button className="btn btn-primary">Thêm</button>
-          </div>
+          </div>  
         </div>
+        <label className='label-note'>Ghi chú:</label>
+        <textarea rows="4" cols="50" placeholder="Nhập ghi chú của bạn..." name='HD_Note' value={formData.HD_Note} onChange={handleInputChange}></textarea>
+        <div className='button-popup'>
+              <button type="submit" className="btn btn-primary">Thêm</button>
+              <button type="button" className="ml-2 btn btn-danger" onClick={onClose}>
+                Hủy
+              </button>
+        </div>
+        </form>
       </div>
     </div>
   );

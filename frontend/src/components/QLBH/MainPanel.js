@@ -1,12 +1,12 @@
-import React from 'react';
-import MainHeader from '../QLBH/MainHeader';
-import Container from '../QLBH/Container';
-import '../../assets/css/MainPanel.css';
+import React from "react";
+import MainHeader from "../QLBH/MainHeader";
+import Container from "../QLBH/Container";
+import "../../assets/css/MainPanel.css";
 
 const MainPanel = () => {
   return (
     <div className="mainPanel">
-      <MainHeader />
+      {/* <MainHeader /> */}
       <Container />
       <div className="footer"></div>
     </div>
