@@ -33,10 +33,9 @@ async function login(req, res) {
     const adminsService = makeContactsService();
     const contact = await adminsService.loginAdmin(QT_Ten, matkhau);
     console.log(contact);
-    if (!contact) {
-      return res.status(401).send({ message: "Tên hoặc mật khẩu không đúng" });
-    }
-    return res.send(contact);
+
+      return res.send(contact);
+
   } catch (error) {
     console.log(error);
     return res

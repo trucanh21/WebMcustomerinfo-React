@@ -23,13 +23,14 @@ async function loginAdmin(req, res) {
     try {
         const adminsService = makeContactsService();
         const contact = await adminsService.loginAdmin(QT_Ten, matkhau);
+        
         if (!contact) {
-            return res.status(401).send({ message: 'Tên hoặc mật khẩu không đúng' });
+            // return res.status(401).send({ message: 'Tên hoặc mật khẩu không đúng' });
         } 
         return res.send(contact);
     } catch (error) {
         console.log(error);
-        return res.status(500).send({ message: 'An error occurred while logging in' });
+        // return res.status(500).send({ message: 'An error occurred while logging in' });
     }
 }
 
