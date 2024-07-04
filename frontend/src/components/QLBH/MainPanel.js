@@ -6,7 +6,7 @@ import "../../assets/css/MainPanel.css";
 const MainPanel = () => {
   return (
     <div className="mainPanel">
-      {/* <MainHeader /> */}
+      <MainHeader />
       <Container />
       <div className="footer"></div>
     </div>

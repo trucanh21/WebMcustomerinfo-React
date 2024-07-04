@@ -40,13 +40,9 @@ CREATE TABLE QuanTri (
   FOREIGN KEY (wards_id) REFERENCES wards(wards_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
-<<<<<<< HEAD
--- INSERT INTO QuanTri (QT_Ten, QT_PhanCap, province_id, district_id, wards_id) VALUES 
--- ('Lan123', '1', '49', '544', '8516');
-=======
 INSERT INTO QuanTri (QT_Ten, QT_PhanCap, province_id, district_id, wards_id) VALUES 
 ('Lan123', '1', '49', '544', '8516');
->>>>>>> 9938db82b6e1a2a3b5f0e99517d0b1c08323e39d
+
 
 -- Create KhachHang table
 CREATE TABLE KhachHang (
@@ -116,10 +112,7 @@ CREATE TABLE HopDong (
   FOREIGN KEY (SP_ID) REFERENCES SanPham(SP_ID)
 
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
-<<<<<<< HEAD
--- INSERT INTO HopDong (QT_ID, KH_ID, SP_ID, LHD_ID, HD_Ngay, HD_GiaTri, HD_CBGhiNhanDoanhSo, HD_HienTrang, HD_Note) VALUES 
--- ('1', '1', '1','1', '2024-1-1', '5000000', 'admin1', 'Chưa xuất hóa đơn', "");
-=======
+
 INSERT INTO HopDong (QT_ID, KH_ID, SP_ID, LHD_ID, HD_Ngay, HD_GiaTri, HD_CBGhiNhanDoanhSo, HD_HienTrang, HD_Note) VALUES 
 ('1', '1', '1','1', '2024-1-1', '5000000', 'admin1', 'Chưa xuất hóa đơn', "");
 >>>>>>> 9938db82b6e1a2a3b5f0e99517d0b1c08323e39d
@@ -147,9 +140,5 @@ CREATE TABLE HoaDon (
   HoaD_HienTrangThanhToan VARCHAR(100) NOT NULL,
   HoaD_NgayThanhToan DATE NOT NULL,
   FOREIGN KEY (HD_ID) REFERENCES HopDong(HD_ID)
-<<<<<<< HEAD
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
-=======
-) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
->>>>>>> 9938db82b6e1a2a3b5f0e99517d0b1c08323e39d

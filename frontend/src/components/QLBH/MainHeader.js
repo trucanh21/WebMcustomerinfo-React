@@ -1,16 +1,21 @@
-import React, { useEffect } from "react";
-import "../../assets/css/MainHeader.css";
-import logoAdmin from "../../assets/img/profile.jpg";
+import React, { useState } from 'react';
+import '../../assets/css/MainHeader.css';
+import logoAdmin from '../../assets/img/profile.jpg';
 
-const MainHeader = () => {
-  useEffect(() => {
-    const items = JSON.parse(localStorage.getItem("isLogin"));
-  }, []);
+const   MainHeader = ({ onSearch }) => { // Nhận onSearch từ prop
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleChange = (event) => {
+    const { value } = event.target;
+    setSearchTerm(value);
+    onSearch(value); // Gọi onSearch khi người dùng nhập tìm kiếm
+  };
 
   const logOut = () => {
     localStorage.removeItem("isLogin");
     window.location.href = "/login";
   };
+
 
   return (
     <div className="main-header">
@@ -18,13 +23,16 @@ const MainHeader = () => {
         <div className="container-fluid">
           <div className="box">
             <div className="container-1">
-              <span className="icon">
-                <ion-icon name="search"></ion-icon>
-              </span>
-              <input type="search" id="search" placeholder="Search..." />
+              <span className="icon"><ion-icon name="search"></ion-icon></span>
+              <input
+                type="search"
+                id="search"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={handleChange}
+              />
             </div>
           </div>
-
           <ul className="main-header-ul">
             <li>
               <p>23/06/2024</p>
@@ -34,7 +42,7 @@ const MainHeader = () => {
             </li>
             <li>
               <a className="link-avt">
-                <div className="dropdown">
+              <div className="dropdown">
                   <div className="avatar-sm">
                     <img src={logoAdmin} className="avatar-img" />
                   </div>
@@ -42,7 +50,6 @@ const MainHeader = () => {
                     <button onClick={() => logOut()}> Logout</button>
                   </div>
                 </div>
-
                 <span>
                   <span>Hi!</span>
                   <span>Lan Tạ</span>

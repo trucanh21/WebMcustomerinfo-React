@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import React, { useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import "../../assets/css/RegistrationForm.css";
@@ -240,5 +240,4 @@ const RegistrationForm = () => {
 };
 
 export default RegistrationForm;
-=======
->>>>>>> 9938db82b6e1a2a3b5f0e99517d0b1c08323e39d
+

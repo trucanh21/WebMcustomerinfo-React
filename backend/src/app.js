@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-<<<<<<< HEAD
+
 const authRouter = require("./routers/auth.router");
 const contactsRouter = require("./routers/customer.router");
 const provinceRouter = require("./routers/province.router");
@@ -11,17 +11,7 @@ const wardsRouter = require("./routers/wards.router");
 const productRouter = require("./routers/product.router");
 const contractRouter = require("./routers/contract.router");
 const typeContractRouter = require("./routers/typeContract.router");
-=======
 
-const contactsRouter = require('./routers/customer.router');
-const provinceRouter = require('./routers/province.router');
-const districtRouter = require('./routers/district.router');
-const wardsRouter = require('./routers/wards.router');
-const productRouter = require('./routers/product.router');
-const contractRouter = require('./routers/contract.router');
-const typeContractRouter = require('./routers/typeContract.router');
-
->>>>>>> 9938db82b6e1a2a3b5f0e99517d0b1c08323e39d
 
 app.use(cors());
 app.use(express.json());
@@ -38,15 +28,4 @@ app.use("/api/product", productRouter);
 app.use("/api/contract", contractRouter);
 app.use("/api/typecontract", typeContractRouter);
 
-<<<<<<< HEAD
-=======
-app.use('/api/contacts', contactsRouter);
-app.use('/api/provinces', provinceRouter);
-app.use('/api/districts', districtRouter);
-app.use('/api/wards', wardsRouter);
-app.use('/api/product', productRouter);
-app.use('/api/contract', contractRouter);
-app.use('/api/typecontract', typeContractRouter);
-
->>>>>>> 9938db82b6e1a2a3b5f0e99517d0b1c08323e39d
 module.exports = app;

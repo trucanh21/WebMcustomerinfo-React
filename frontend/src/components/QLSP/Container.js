@@ -5,37 +5,6 @@ import Popup from 'reactjs-popup';
 import PopupContent from '../../components/QLSP/PopupContent'; 
 import PopupEdit from '../../components/QLSP/PopupEdit'; 
 import { fetchProducts } from '../../features/apiCalls';
-<<<<<<< HEAD
-
-const Container = () => {
-  const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null); 
-  const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
-
-  useEffect(() => {
-    const getProducts = async () => {
-      try {
-        const productsData = await fetchProducts();
-        setProducts(productsData);
-      } catch (error) {
-        console.error('Error fetching products', error); // Corrected the error message
-      }
-    };
-
-    getProducts();
-  }, []);
-
-  const handleEditClick = (product) => {
-    setSelectedProduct(product); // Set the selected product
-    setIsEditPopupOpen(true);
-  };
-
-  const closeEditPopup = () => {
-    setIsEditPopupOpen(false);
-    setSelectedProduct(null);
-  };
-
-=======
 
 const Container = ({ searchTerm }) => {
   const [products, setProducts] = useState([]);
@@ -80,7 +49,6 @@ const Container = ({ searchTerm }) => {
     setSelectedProduct(null);
   };
 
->>>>>>> 9938db82b6e1a2a3b5f0e99517d0b1c08323e39d
   return (
     <div className="container">
       <div className="page-inner">
@@ -111,11 +79,7 @@ const Container = ({ searchTerm }) => {
                 </tr>
               </thead>
               <tbody>
-<<<<<<< HEAD
-                {products.map((product) => (
-=======
                 {filteredProducts.map((product) => (
->>>>>>> 9938db82b6e1a2a3b5f0e99517d0b1c08323e39d
                   <tr key={product.SP_ID}>
                     <td>{product.SP_ID}</td>
                     <td>{product.SP_Ten}</td>
