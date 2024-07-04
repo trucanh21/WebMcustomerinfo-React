@@ -5,7 +5,7 @@ import Popup from 'reactjs-popup';
 import PopupContent from '../../components/QLKH/PopupContent'; 
 import PopupEdit from '../../components/QLKH/PopupEdit';
 import { fetchCustomers } from '../../features/apiCalls';
-import MainHeader from './MainHeader';
+
 
 const Container = ({ searchTerm }) => { // Nhận searchTerm từ prop
   const [customers, setCustomers] = useState([]);
@@ -52,7 +52,6 @@ const Container = ({ searchTerm }) => { // Nhận searchTerm từ prop
 
   return (
     <div className="container">
-     
       <div className="page-inner">
         <div className="page-header">
           <h3>Quản lý khách hàng</h3>

@@ -1,19 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../assets/css/MainHeader.css';
-import logoAdmin from '../../assets/img/profile.jpg'
+import logoAdmin from '../../assets/img/profile.jpg';
 
-const MainHeader = () => {
+const MainHeader = ({ onSearch }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleChange = (event) => {
+    const { value } = event.target;
+    setSearchTerm(value);
+    onSearch(value);
+  };
+
   return (
     <div className="main-header">
       <nav>
         <div className="container-fluid">
-          <div class="box">
-              <div class="container-1">
-                  <span class="icon"><ion-icon name="search"></ion-icon></span>
-                  <input type="search" id="search" placeholder="Search..." />
-              </div>
+          <div className="box">
+            <div className="container-1">
+              <span className="icon"><ion-icon name="search"></ion-icon></span>
+              <input
+                type="search"
+                id="search"
+                placeholder="Search..."
+                value={searchTerm}
+                onChange={handleChange}
+              />
             </div>
-                
+          </div>
           <ul className="main-header-ul">
             <li>
               <p>23/06/2024</p>
@@ -22,9 +35,9 @@ const MainHeader = () => {
               <ion-icon name="notifications"></ion-icon>
             </li>
             <li>
-              <a className="link-avt">
+              <a className="link-avt" href="#">
                 <div className="avatar-sm">
-                  <img src={logoAdmin} className="avatar-img"/>
+                  <img src={logoAdmin} className="avatar-img" alt="Admin Profile" />
                 </div>
                 <span>
                   <span>Hi!</span>
