@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 // import '../../assets/css/RegistrationForm.css';
 import { authLogin } from "../../features/apiCalls";
@@ -100,3 +101,5 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+=======
+>>>>>>> 9938db82b6e1a2a3b5f0e99517d0b1c08323e39d

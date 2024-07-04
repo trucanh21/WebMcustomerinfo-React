@@ -5,6 +5,7 @@ const ADDRESS_API_BASE_URL = "http://localhost:3001/api";
 const ADDRESS_API_BASE_URL_test = "http://localhost:3001/api";
 // ----------------------- API PRODUCT --------------------
 
+<<<<<<< HEAD
 export const fetchProducts = async () => {
   try {
     const response = await axios.get(`${ADDRESS_API_BASE_URL}/product`);
@@ -53,12 +54,23 @@ export const fetchDistricts = async () => {
     return response.data;
   } catch (error) {
     console.error("Error fetching products", error);
+=======
+// ----------------------- API PRODUCT --------------------
+
+export const fetchProducts = async () => {
+  try {
+    const response = await axios.get(`${ADDRESS_API_BASE_URL}/product`);
+    return response.data.products;
+  } catch (error) {
+    console.error('Error fetching products', error);
+>>>>>>> 9938db82b6e1a2a3b5f0e99517d0b1c08323e39d
     throw error;
   }
 };
 
 export const addProduct = async (product) => {
   try {
+<<<<<<< HEAD
     const response = await axios.post(
       `${ADDRESS_API_BASE_URL}/product`,
       product
@@ -66,12 +78,19 @@ export const addProduct = async (product) => {
     return response.data;
   } catch (error) {
     console.error("Error adding product", error);
+=======
+    const response = await axios.post(`${ADDRESS_API_BASE_URL}/product`, product);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding product', error);
+>>>>>>> 9938db82b6e1a2a3b5f0e99517d0b1c08323e39d
     throw error;
   }
 };
 
 export const updateProduct = async (id, product) => {
   try {
+<<<<<<< HEAD
     const response = await axios.put(
       `${ADDRESS_API_BASE_URL}/product/${id}`,
       product
@@ -79,6 +98,12 @@ export const updateProduct = async (id, product) => {
     return response.data;
   } catch (error) {
     console.error("Error updating product", error);
+=======
+    const response = await axios.put(`${ADDRESS_API_BASE_URL}/product/${id}`, product);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating product', error);
+>>>>>>> 9938db82b6e1a2a3b5f0e99517d0b1c08323e39d
     throw error;
   }
 };
@@ -164,13 +189,18 @@ export const fetchContract = async () => {
     const response = await axios.get(`${ADDRESS_API_BASE_URL}/contract`);
     return response.data.contracts;
   } catch (error) {
+<<<<<<< HEAD
     console.error("Error fetching contracts", error);
+=======
+    console.error('Error fetching contracts', error);
+>>>>>>> 9938db82b6e1a2a3b5f0e99517d0b1c08323e39d
     throw error;
   }
 };
 
 export const addContract = async (contract) => {
   try {
+<<<<<<< HEAD
     const response = await axios.post(
       `${ADDRESS_API_BASE_URL}/contract`,
       contract
@@ -178,6 +208,12 @@ export const addContract = async (contract) => {
     return response.data;
   } catch (error) {
     console.error("Error adding contract", error);
+=======
+    const response = await axios.post(`${ADDRESS_API_BASE_URL}/contract`, contract);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding contract', error);
+>>>>>>> 9938db82b6e1a2a3b5f0e99517d0b1c08323e39d
     throw error;
   }
 };
@@ -187,7 +223,14 @@ export const fetchTypeContract = async () => {
     const response = await axios.get(`${ADDRESS_API_BASE_URL}/typecontract`);
     return response.data.typeContracts;
   } catch (error) {
+<<<<<<< HEAD
     console.error("Error fetching typeContracts", error);
     throw error;
   }
 };
+=======
+    console.error('Error fetching typeContracts', error);
+    throw error;
+  }
+};
+>>>>>>> 9938db82b6e1a2a3b5f0e99517d0b1c08323e39d
