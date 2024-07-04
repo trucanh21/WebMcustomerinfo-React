@@ -3,6 +3,51 @@ import axios from 'axios';
 const API_BASE_URL = 'http://localhost:3000/api/contacts/';
 const ADDRESS_API_BASE_URL = 'http://localhost:3000/api';
 
+export const fetchContracts = async ({ fromDate, toDate, fromDateInvoice, toDateInvoice, KH_Ten }) => {
+  try {
+    const response = await axios.get(`${ADDRESS_API_BASE_URL}/contract`, {
+      params: { fromDate, toDate, fromDateInvoice, toDateInvoice, KH_Ten }
+    });
+    return response.data.contracts;
+  } catch (error) {
+    console.error('Error fetching contracts', error);
+    throw error;
+  }
+};
+
+
+// ----------------------- API CUSTOMER --------------------
+export const fetchCustomers = async () => {
+  try {
+    const response = await axios.get(API_BASE_URL);
+    return response.data.customers;
+  } catch (error) {
+    console.error('Error fetching customers', error);
+    throw error;
+  }
+};
+
+export const addCustomer = async (customer) => {
+  try {
+    const response = await axios.post(API_BASE_URL, customer);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding customer', error);
+    throw error;
+  }
+};
+
+export const updateCustomer = async (id, customer) => {
+  try {
+    const response = await axios.put(`${API_BASE_URL}${id}`, customer);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating customer', error);
+    throw error;
+  }
+};
+
+
 // ----------------------- API PRODUCT --------------------
 
 export const fetchProducts = async () => {
@@ -34,36 +79,7 @@ export const updateProduct = async (id, product) => {
     throw error;
   }
 };
-// ----------------------- API CUSTOMER --------------------
-export const fetchCustomers = async () => {
-  try {
-    const response = await axios.get(API_BASE_URL);
-    return response.data.customers;
-  } catch (error) {
-    console.error('Error fetching customers', error);
-    throw error;
-  }
-};
 
-export const addCustomer = async (customer) => {
-  try {
-    const response = await axios.post(API_BASE_URL, customer);
-    return response.data;
-  } catch (error) {
-    console.error('Error adding customer', error);
-    throw error;
-  }
-};
-
-export const updateCustomer = async (id, customer) => {
-  try {
-    const response = await axios.put(`${API_BASE_URL}${id}`, customer);
-    return response.data;
-  } catch (error) {
-    console.error('Error updating customer', error);
-    throw error;
-  }
-};
 
 export const deleteCustomer = async (id) => {
   try {
@@ -105,17 +121,7 @@ export const fetchWardsByDistrict = async (districtId) => {
   }
 };
 
-// API CALL Quản lý bảo hành
 
-export const fetchContract = async () => {
-  try {
-    const response = await axios.get(`${ADDRESS_API_BASE_URL}/contract`);
-    return response.data.contracts;
-  } catch (error) {
-    console.error('Error fetching contracts', error);
-    throw error;
-  }
-};
 
 export const addContract = async (contract) => {
   try {

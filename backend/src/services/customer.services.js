@@ -26,7 +26,7 @@ function makeContactsService() {
     }
 
     async function getManycustomers(query) {
-    const { KH_Ten, KH_BPQuanLy, page = 1, limit = 10 } = query;
+    const { KH_Ten, KH_BPQuanLy, page = 1, limit = 100 } = query;
     const offset = (page - 1) * limit;
 
     const results = await knex('KhachHang')
