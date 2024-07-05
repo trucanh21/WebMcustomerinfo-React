@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { fetchProvinces, fetchDistrictsByProvince, fetchWardsByDistrict, addCustomer } from '../../features/apiCalls';
-import '../../assets/css/Popup.css';
+import React, { useState, useEffect } from "react";
+import {
+  fetchProvinces,
+  fetchDistrictsByProvince,
+  fetchWardsByDistrict,
+  addCustomer,
+} from "../../features/apiCalls";
+import "../../assets/css/Popup.css";
 
 const PopupShow = ({ onClose }) => {
   const [provinces, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [wards, setWards] = useState([]);
-  const [selectedProvince, setSelectedProvince] = useState('');
-  const [selectedDistrict, setSelectedDistrict] = useState('');
-  const [selectedWard, setSelectedWard] = useState('');
+  const [selectedProvince, setSelectedProvince] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedWard, setSelectedWard] = useState("");
   const [formData, setFormData] = useState({
     KH_Ten: '',
     KH_DaiDien: '',
@@ -19,11 +24,11 @@ const PopupShow = ({ onClose }) => {
 
   useEffect(() => {
     fetchProvinces()
-      .then(data => {
+      .then((data) => {
         setProvinces(data);
       })
-      .catch(error => {
-        console.error('There was an error fetching the provinces!', error);
+      .catch((error) => {
+        console.error("There was an error fetching the provinces!", error);
       });
   }, []);
 
@@ -42,8 +47,8 @@ const PopupShow = ({ onClose }) => {
     } else {
       setDistricts([]);
       setWards([]);
-      setSelectedDistrict('');
-      setSelectedWard('');
+      setSelectedDistrict("");
+      setSelectedWard("");
     }
   }, [selectedProvince]);
 
@@ -65,7 +70,7 @@ const PopupShow = ({ onClose }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prevState => ({ ...prevState, [name]: value }));
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
   };
 
   const handleSubmit = (e) => {
@@ -79,12 +84,12 @@ const PopupShow = ({ onClose }) => {
     };
 
     addCustomer(customerData)
-      .then(response => {
-        console.log('Customer added successfully', response);
+      .then((response) => {
+        console.log("Customer added successfully", response);
         onClose();
       })
-      .catch(error => {
-        console.error('There was an error adding the customer!', error);
+      .catch((error) => {
+        console.error("There was an error adding the customer!", error);
       });
   };
 
@@ -96,8 +101,8 @@ const PopupShow = ({ onClose }) => {
           <ion-icon name="close" className="close" onClick={onClose}></ion-icon>
         </div>
         <div className="popup-body">
-          <form onSubmit={handleSubmit} >
-            <div className='test'>
+          <form onSubmit={handleSubmit}>
+            <div className="test">
               <div className="popup-column column1">
                 <div className="space-popup">
                   <label>Tên đơn vị:</label>
@@ -127,12 +132,12 @@ const PopupShow = ({ onClose }) => {
                   <input type="text" name="KH_TaiKhoan" placeholder="Nhập tài khoản" value={formData.KH_TaiKhoan} onChange={handleInputChange} />
                 </div>
               </div>
-              </div>
-            <div className='GroupProvince'>
+            </div>
+            <div className="GroupProvince">
               <div className="space-popup">
                 <label>Tỉnh thành phố:</label>
-                <select className='province' value={selectedProvince} onChange={e => setSelectedProvince(e.target.value)}>
-                  <option value=''>Chọn tỉnh thành</option>
+                <select className="province" value={selectedProvince} onChange={e => setSelectedProvince(e.target.value)}>
+                  <option value="">Chọn tỉnh thành</option>
                   {provinces.map(province => (
                     <option key={province.province_id} value={province.province_id}>
                       {province.name}
@@ -142,8 +147,8 @@ const PopupShow = ({ onClose }) => {
               </div>
               <div className="space-popup">
                 <label>Quận Huyện:</label>
-                <select className='districts' value={selectedDistrict} onChange={e => setSelectedDistrict(e.target.value)} disabled={!selectedProvince}>
-                  <option value=''>Chọn quận huyện</option>
+                <select className="districts" value={selectedDistrict} onChange={e => setSelectedDistrict(e.target.value)} disabled={!selectedProvince}>
+                  <option value="">Chọn quận huyện</option>
                   {districts.map(district => (
                     <option key={district.district_id} value={district.district_id}>
                       {district.name}
@@ -153,8 +158,8 @@ const PopupShow = ({ onClose }) => {
               </div>
               <div className="space-popup">
                 <label>Phường Xã:</label>
-                <select className='wards' value={selectedWard} onChange={e => setSelectedWard(e.target.value)} disabled={!selectedDistrict}>
-                  <option value=''>Chọn phường xã</option>
+                <select className="wards" value={selectedWard} onChange={e => setSelectedWard(e.target.value)} disabled={!selectedDistrict}>
+                  <option value="">Chọn phường xã</option>
                   {wards.map(ward => (
                     <option key={ward.wards_id} value={ward.wards_id}>
                       {ward.name}
@@ -163,8 +168,10 @@ const PopupShow = ({ onClose }) => {
                 </select>
               </div>
             </div>
-            <div className='button-popup'>
-              <button type="submit" className="btn btn-primary">Thêm</button>
+            <div className="button-popup">
+              <button type="submit" className="btn btn-primary">
+                Thêm
+              </button>
               <button type="button" className="ml-2 btn btn-danger" onClick={onClose}>
                 Hủy
               </button>

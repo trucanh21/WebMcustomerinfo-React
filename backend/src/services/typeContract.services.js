@@ -1,3 +1,4 @@
+
 const knex = require('../database/knex');
 
 function makeTypeContractService() {
@@ -15,3 +16,4 @@ function makeTypeContractService() {
 }
 
 module.exports = makeTypeContractService;
+

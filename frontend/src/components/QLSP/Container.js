@@ -6,9 +6,10 @@ import PopupContent from '../../components/QLSP/PopupContent';
 import PopupEdit from '../../components/QLSP/PopupEdit'; 
 import { fetchProducts } from '../../features/apiCalls';
 
-const Container = () => {
+const Container = ({ searchTerm }) => {
   const [products, setProducts] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null); 
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [isEditPopupOpen, setIsEditPopupOpen] = useState(false);
 
   useEffect(() => {
@@ -16,16 +17,30 @@ const Container = () => {
       try {
         const productsData = await fetchProducts();
         setProducts(productsData);
+        setFilteredProducts(productsData);
       } catch (error) {
-        console.error('Error fetching products', error); // Corrected the error message
+        console.error('Error fetching products', error);
       }
     };
 
     getProducts();
   }, []);
 
+  useEffect(() => {
+    if (searchTerm) {
+      const lowercasedTerm = searchTerm.toLowerCase();
+      const filtered = products.filter(product =>
+        product.SP_ID.toString().includes(lowercasedTerm) ||
+        product.SP_Ten.toLowerCase().includes(lowercasedTerm)
+      );
+      setFilteredProducts(filtered);
+    } else {
+      setFilteredProducts(products);
+    }
+  }, [searchTerm, products]);
+
   const handleEditClick = (product) => {
-    setSelectedProduct(product); // Set the selected product
+    setSelectedProduct(product);
     setIsEditPopupOpen(true);
   };
 
@@ -64,7 +79,7 @@ const Container = () => {
                 </tr>
               </thead>
               <tbody>
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                   <tr key={product.SP_ID}>
                     <td>{product.SP_ID}</td>
                     <td>{product.SP_Ten}</td>

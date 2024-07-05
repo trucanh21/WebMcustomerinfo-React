@@ -1,0 +1,116 @@
+.registration-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.registration-container h1 {
+  margin-bottom: 30px;
+  margin-top: 30px;
+  font-size: 32px;
+  text-align: center;
+  color: #333;
+}
+
+.registration-container form div {
+  margin-bottom: 15px;
+}
+
+.registration-container form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.registration-container form input[type="text"],
+.registration-container form input[type="password"],
+.registration-container form select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.registration-container form button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #0149cd;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.registration-container form button[type="submit"]:hover {
+  background-color: #0b3ca8;
+}
+
+.registration-container .login-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.login-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.login-container h1 {
+  margin-bottom: 30px;
+  margin-top: 30px;
+  font-size: 32px;
+  text-align: center;
+  color: #333;
+}
+
+.login-container form div {
+  margin-bottom: 15px;
+}
+
+.login-container form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.login-container form input[type="text"],
+.login-container form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.login-container form button[type="submit"] {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #0149cd;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.login-container form button[type="submit"]:hover {
+  background-color: #0b3ca8;
+}
+
+.login-container .login-link {
+  text-align: center;
+  margin-top: 20px;
+}

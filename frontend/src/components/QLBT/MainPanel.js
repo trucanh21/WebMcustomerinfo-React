@@ -1,7 +1,7 @@
-import React from 'react';
-import MainHeader from '../../components/QLBT/MainHeader';
-import Container from '../../components/QLBT/Container';
-import '../../assets/css/MainPanel.css';
+import React from "react";
+import MainHeader from "../../components/QLBT/MainHeader";
+import Container from "../../components/QLBT/Container";
+import "../../assets/css/MainPanel.css";
 
 const MainPanel = () => {
   return (

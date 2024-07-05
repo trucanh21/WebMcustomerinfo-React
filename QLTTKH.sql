@@ -1,3 +1,5 @@
+
+DROP DATABASE db_qlttkh;
 CREATE DATABASE db_qlttkh;
 USE db_qlttkh;
 
@@ -32,7 +34,7 @@ CREATE TABLE QuanTri (
   province_id INT,
   district_id INT,
   wards_id INT,
-  matkhau VARCHAR(255) NOT NULL,
+  matkhau VARCHAR(255)  NULL,
   FOREIGN KEY (province_id) REFERENCES province(province_id),
   FOREIGN KEY (district_id) REFERENCES district(district_id),
   FOREIGN KEY (wards_id) REFERENCES wards(wards_id)
@@ -112,6 +114,10 @@ CREATE TABLE HopDong (
 INSERT INTO HopDong (QT_ID, KH_ID, SP_ID, LHD_ID, HD_Ngay, HD_GiaTri, HD_CBGhiNhanDoanhSo, HD_HienTrang, HD_Note) VALUES 
 ('1', '1', '1','1', '2024-1-1', '5000000', 'admin1', 'Chưa xuất hóa đơn', "");
 
+INSERT INTO HopDong (QT_ID, KH_ID, SP_ID, LHD_ID, HD_Ngay, HD_GiaTri, HD_CBGhiNhanDoanhSo, HD_HienTrang, HD_Note) VALUES 
+('1', '1', '1','1', '2024-1-1', '5000000', 'admin1', 'Chưa xuất hóa đơn', "");
+>>>>>>> 9938db82b6e1a2a3b5f0e99517d0b1c08323e39d
+
 -- Create BaoTri table
 CREATE TABLE BaoTri (
   BT_ID INT PRIMARY KEY AUTO_INCREMENT,
@@ -136,3 +142,4 @@ CREATE TABLE HoaDon (
   HoaD_NgayThanhToan DATE NOT NULL,
   FOREIGN KEY (HD_ID) REFERENCES HopDong(HD_ID)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+

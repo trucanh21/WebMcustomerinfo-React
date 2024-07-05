@@ -26,9 +26,12 @@ function makeContactsService() {
     async function loginAdmin(QT_Ten, matkhau) {
         const admin = await knex('QuanTri').where('QT_Ten', QT_Ten).first();
         if (admin && await bcrypt.compare(matkhau, admin.matkhau)) {
-            return admin;
+            return true;
         }
-        return null;
+        else {
+            return false;
+        }
+       
     }
 
     return {

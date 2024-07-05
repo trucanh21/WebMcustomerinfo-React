@@ -1,3 +1,4 @@
+
 const makeTypeContractService = require('../services/typeContract.services');
 
 async function getTypeContracts(req, res) {
@@ -14,3 +15,4 @@ async function getTypeContracts(req, res) {
 module.exports = {
     getTypeContracts,
 };
+

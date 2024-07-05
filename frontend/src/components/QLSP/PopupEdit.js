@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import '../../assets/css/Popup.css';
 import { updateProduct } from '../../features/apiCalls';
@@ -91,3 +92,4 @@ const PopupEdit = ({ onClose, product }) => {
 };
 
 export default PopupEdit;
+

@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import Sidebar from "../components/QLBH/Sidebar";
 import MainPanel from "../components/QLBH/MainPanel";
-import '../assets/css/QLKH.css';
+import "../assets/css/QLKH.css";
 
 const QLBH = () => {
   return (

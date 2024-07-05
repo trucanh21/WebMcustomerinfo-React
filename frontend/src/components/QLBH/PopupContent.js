@@ -139,10 +139,12 @@ const PopupShow = ({ onClose }) => {
                 <label>Mã Cán bộ ghi nhận:</label>
                 <input className="sanpham" type="text" placeholder="Nhập mã cán bộ ghi nhận" name="QT_ID" value={formData.QT_ID} onChange={handleInputChange} />
               </div>
+              <div className="space-popup">
+                <label className="label-note">Ghi chú:</label>
+                <textarea rows="4" cols="50" placeholder="Nhập ghi chú của bạn..." name="HD_Note" value={formData.HD_Note} onChange={handleInputChange}></textarea>
+              </div>
             </div>
           </div>
-          <label className="label-note">Ghi chú:</label>
-          <textarea rows="4" cols="50" placeholder="Nhập ghi chú của bạn..." name="HD_Note" value={formData.HD_Note} onChange={handleInputChange}></textarea>
           <div className="button-popup">
             <button type="submit" className="btn btn-primary">Thêm</button>
             <button type="button" className="ml-2 btn btn-danger" onClick={onClose}>
