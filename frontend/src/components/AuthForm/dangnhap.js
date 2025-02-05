@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import '../../assets/css/RegistrationForm.css';
 import { authLogin } from "../../features/apiCalls";
@@ -42,11 +41,11 @@ const LoginForm = () => {
     <div className="login-container">
       <h1>Đăng Nhập</h1>
       <form className="login-form" onSubmit={handleSubmit}>
-        <h2>Đăng nhập</h2>
         <div>
           <label>Tên đăng nhập:</label>
           <input
             type="text"
+            placeholder="Nhập tên đăng nhập"
             name="username"
             value={formData.username}
             onChange={handleInputChange}
@@ -57,6 +56,7 @@ const LoginForm = () => {
           <label>Mật khẩu:</label>
           <input
             type="password"
+            placeholder="Nhập mật khẩu"
             name="password"
             value={formData.password}
             onChange={handleInputChange}

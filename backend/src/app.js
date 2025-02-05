@@ -11,7 +11,8 @@ const wardsRouter = require("./routers/wards.router");
 const productRouter = require("./routers/product.router");
 const contractRouter = require("./routers/contract.router");
 const typeContractRouter = require("./routers/typeContract.router");
-
+const invoiceRouter = require("./routers/invoice.router");
+const maintenanceRouter = require("./routers/maintenance.router");
 
 app.use(cors());
 app.use(express.json());
@@ -27,5 +28,7 @@ app.use("/api/wards", wardsRouter);
 app.use("/api/product", productRouter);
 app.use("/api/contract", contractRouter);
 app.use("/api/typecontract", typeContractRouter);
+app.use("/api/invoice", invoiceRouter);
+app.use("/api/maintenance", maintenanceRouter);
 
 module.exports = app;

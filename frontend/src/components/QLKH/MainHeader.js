@@ -1,8 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../../assets/css/MainHeader.css';
 import logoAdmin from '../../assets/img/profile.jpg';
 
+
 const   MainHeader = ({ onSearch }) => { // Nhận onSearch từ prop
+  const [currentDate, setCurrentDate] = useState("");
+        useEffect(()=>{
+          const today = new Date();
+          const formattedDate = today.toLocaleDateString("vi-VN");
+          setCurrentDate(formattedDate);  
+          }, []);
   const [searchTerm, setSearchTerm] = useState('');
 
   const handleChange = (event) => {
@@ -35,7 +42,7 @@ const   MainHeader = ({ onSearch }) => { // Nhận onSearch từ prop
           </div>
           <ul className="main-header-ul">
             <li>
-              <p>23/06/2024</p>
+              <p>{currentDate}</p>
             </li>
             <li>
               <ion-icon name="notifications"></ion-icon>

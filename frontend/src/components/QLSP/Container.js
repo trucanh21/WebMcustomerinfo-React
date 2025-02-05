@@ -6,6 +6,11 @@ import PopupContent from '../../components/QLSP/PopupContent';
 import PopupEdit from '../../components/QLSP/PopupEdit'; 
 import { fetchProducts } from '../../features/apiCalls';
 
+const formatDate = (dateString) => {
+  const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+};
+
 const Container = ({ searchTerm }) => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
@@ -83,7 +88,7 @@ const Container = ({ searchTerm }) => {
                   <tr key={product.SP_ID}>
                     <td>{product.SP_ID}</td>
                     <td>{product.SP_Ten}</td>
-                    <td>{product.SP_NgayNhap}</td>
+                    <td>{formatDate(product.SP_NgayNhap)}</td>
                     <td>{product.SP_BPQuanLy}</td>
                     <td>
                       <ion-icon name="create" onClick={() => handleEditClick(product)}></ion-icon>

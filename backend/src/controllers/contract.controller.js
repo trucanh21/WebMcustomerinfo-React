@@ -26,7 +26,42 @@ async function getContractsByFilter(req, res) {
     }
 }
 
+async function updateContractInvoice(req, res) {
+    const { id } = req.params;
+    try {
+        const contractService = makeContractService();
+        const updated = await contractService.updateContractInvoice(id);
+        if (updated) {
+            return res.status(200).json({ message: 'Trạng thái hóa đơn hợp đồng đã được cập nhật thành công.' });
+        } else {
+            return res.status(404).json({ message: 'Không tìm thấy hợp đồng để cập nhật.' });
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: 'Đã xảy ra lỗi khi cập nhật trạng thái hóa đơn hợp đồng.' });
+    }
+}
+
+async function updateContractMaintenance(req, res) {
+    const { id } = req.params;
+    try {
+        const contractService = makeContractService();
+        const updated = await contractService.updateContractMaintenance(id);
+        if (updated) {
+            return res.status(200).json({ message: 'Trạng thái hóa đơn hợp đồng đã được cập nhật thành công.' });
+        } else {
+            return res.status(404).json({ message: 'Không tìm thấy hợp đồng để cập nhật.' });
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ error: 'Đã xảy ra lỗi khi cập nhật trạng thái hóa đơn hợp đồng.' });
+    }
+}
+
+
 module.exports = {
     getContractsByFilter,
     createContract,
+    updateContractInvoice,
+    updateContractMaintenance
 };

@@ -31,6 +31,7 @@ function makeContractService() {
     const results = await knex('HopDong')
         .join('KhachHang', 'HopDong.KH_ID', 'KhachHang.KH_ID')
         .join('SanPham', 'HopDong.SP_ID', 'SanPham.SP_ID')
+        .join('LoaiHopDong', 'HopDong.LHD_ID', 'LoaiHopDong.LHD_ID')
         .modify((qb) => {
             // Condition for fromDate and toDate with LHD_ID = 1
             if (fromDate && toDate) {
@@ -66,6 +67,7 @@ function makeContractService() {
             'HopDong.QT_ID',
             'HopDong.KH_ID',
             'HopDong.SP_ID',
+            'LoaiHopDong.LHD_NAME',
             'HopDong.LHD_ID',
             'HopDong.HD_Ngay',
             'HopDong.HD_GiaTri',
@@ -80,10 +82,30 @@ function makeContractService() {
         contracts: results,
     };
 }
+    async function updateContractInvoice(HD_ID) {
+        const updatedRows = await knex('HopDong')
+            .where('HD_ID', HD_ID)
+            .update({ HD_HienTrang: 'Đã xuất hóa đơn' });
 
+        return updatedRows > 0; // Return true if at least one row was updated
+    }
+
+    async function updateContractMaintenance(HD_ID, LHD_ID) {
+        const updatedRows = await knex('HopDong')
+            .where('HD_ID', HD_ID)
+            .update({
+                HD_HienTrang: 'Chưa xuất hóa đơn',
+                LHD_ID: '3'
+            });
+
+        return updatedRows > 0; // Return true if at least one row was updated
+    }
+ 
     return {
         createContract,
         getManyContracts,
+        updateContractInvoice,
+        updateContractMaintenance,
     };
 }
 

@@ -6,8 +6,5 @@ router
     .route('/')
     .get(maintenanceController.getMaintenancesByFilter)
     .post(maintenanceController.createMaintenance);
-router
-    .route('/:id')
-    .put(maintenanceController.updateMaintenance);
-
+    
 module.exports = router;

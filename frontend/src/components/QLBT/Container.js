@@ -41,21 +41,75 @@ const Container = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>BT1</td>
-                  <td>BH1</td>
-                  <td>10-10-2023</td>
+                  <td>1</td>
+                  <td>1</td>
+                  <td>07-07-2024</td>
                   <td>Kinh phí Nâng cấp phần mềm KTHC</td>
-                  <td>Nguyễn Văn A</td>
-                  <td>Tỉnh</td>
+                  <td>TaXuanLan</td>
+                  <td>Văn phòng 4</td>
                   <td>Sửa nhanh</td>
                   <td>không có</td>
-                  {/* <Popup trigger = {<td>
-                    <ion-icon name="create"></ion-icon></td>
-                  }modal nested>
-                {close => <PopupDelete onClose={close} />}
-                  </Popup> */}
                 </tr>
-                {/* More rows... */}
+                <tr>
+                  <td>2</td>
+                  <td>21</td>
+                  <td>08-01-2024</td>
+                  <td>Kinh phí Nâng cấp phần mềm CTT</td>
+                  <td>TaXuanLan</td>
+                  <td>Văn phòng 1</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>5</td>
+                  <td>02-03-2024</td>
+                  <td>Kinh phí bảo trì phần mềm CIT</td>
+                  <td>ChauHaiThong</td>
+                  <td>Văn phòng 1</td>
+                  <td>Sửa nhanh</td>
+                  <td>không có</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>20</td>
+                  <td>10-10-2023</td>
+                  <td>Kinh phí phần mềm NTT</td>
+                  <td>TaXuanLan</td>
+                  <td>Văn phòng 2</td>
+                  <td>Sửa nhanh</td>
+                  <td>không có</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>16</td>
+                  <td>10-10-2023</td>
+                  <td>Kinh phí Nâng cấp phần mềm KTHC</td>
+                  <td>VoThiKieuMy</td>
+                  <td>Văn phòng 2</td>
+                  <td>Sửa nhanh</td>
+                  <td>không có</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>22</td>
+                  <td>10-10-2023</td>
+                  <td>Kinh phí Bảo trì phần mềm KTHC</td>
+                  <td>TaXuanLan</td>
+                  <td>Văn phòng 2</td>
+                  <td>Sửa nhanh</td>
+                  <td>không có</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>26</td>
+                  <td>10-10-2023</td>
+                  <td>Kinh phí Chuyển giao phần mềm Kế toán Hành chính Sự nghiệp</td>
+                  <td>ChauHaiThong</td>
+                  <td>Văn phòng 2</td>
+                  <td>Sửa nhanh</td>
+                  <td>không có</td>
+                </tr>
               </tbody>
             </table>
           </div>

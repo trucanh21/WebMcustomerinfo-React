@@ -3,14 +3,29 @@ import '../../assets/css/Container.css';
 import '../../assets/css/Popup.css';
 import Popup from 'reactjs-popup';
 import PopupContent from '../QLBH/PopupContent';
+import PopupInvoice from '../../components/QLBH/PopupAddInvoice';
 import { fetchContracts } from '../../features/apiCalls';
+import PopupAddMaintenance from '../../components/QLBH/PopuiAddMaintenance'; // Import PopupAddMaintenance
+
+
+const formatDate = (dateString) => {
+  const options = { year: 'numeric', month: '2-digit', day: '2-digit' };
+  return new Date(dateString).toLocaleDateString(undefined, options);
+};
+
+const formatCurrency = (value) => {
+  return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+};
 
 const Container = ({ searchTerm }) => {
   const [contracts, setContracts] = useState([]);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
-  const [startDateInvoice, setStartDateInvoice] = useState(''); // Renamed
-  const [endDateInvoice, setEndDateInvoice] = useState(''); // Renamed
+  const [startDateInvoice, setStartDateInvoice] = useState('');
+  const [endDateInvoice, setEndDateInvoice] = useState('');
+  const [selectedContract, setSelectedContract] = useState(null);
+  const [isInvoicePopupOpen, setIsInvoicePopupOpen] = useState(false);
+  const [isMaintenancePopupOpen, setIsMaintenancePopupOpen] = useState(false);
 
   const getContracts = useCallback(async () => {
     try {
@@ -39,18 +54,15 @@ const Container = ({ searchTerm }) => {
     const contractDate = new Date(date);
     const currentDate = new Date();
 
-    // Calculate deadline based on LHD_ID
     let deadlineDate = new Date(contractDate);
-    if (LHD_ID === 1) {
+    if (LHD_ID === 1 && HD_HienTrang === 'Đã xuất hóa đơn') {
       deadlineDate.setDate(deadlineDate.getDate() + 30);
-    } else if (LHD_ID === 2 || LHD_ID === 3) {
+    } else if (LHD_ID === 2 || LHD_ID === 3 && HD_HienTrang === 'Đã xuất hóa đơn') {
       deadlineDate.setDate(deadlineDate.getDate() + 60);
     }
 
-    // Check if one year has passed
     const oneYearPassed = currentDate > new Date(contractDate.setFullYear(contractDate.getFullYear() + 1));
 
-    // Check if it's time to issue an invoice
     const issueInvoiceTime = (LHD_ID === 1 && HD_HienTrang === 'Chưa xuất hóa đơn' && currentDate > new Date(deadlineDate))
       || ((LHD_ID === 2 || LHD_ID === 3) && HD_HienTrang === 'Chưa xuất hóa đơn' && currentDate > new Date(deadlineDate));
 
@@ -58,6 +70,26 @@ const Container = ({ searchTerm }) => {
       oneYearPassed,
       issueInvoiceTime,
     };
+  };
+
+  const handleEditClick = (contract) => {
+    setSelectedContract(contract);
+    setIsInvoicePopupOpen(true);
+  };
+
+  const handleAddMaintenanceClick = (contract) => {
+    setSelectedContract(contract);
+    setIsMaintenancePopupOpen(true);
+  };
+
+  const closeInvoicePopup = () => {
+    setIsInvoicePopupOpen(false);
+    setSelectedContract(null);
+  };
+
+  const closeMaintenancePopup = () => {
+    setIsMaintenancePopupOpen(false);
+    setSelectedContract(null);
   };
 
   return (
@@ -134,18 +166,22 @@ const Container = ({ searchTerm }) => {
                   <tr key={contract.HD_ID}>
                     <td>{contract.HD_ID}</td>
                     <td>{contract.KH_Ten}</td>
-                    <td>{contract.HD_Ngay}</td>
+                    <td>{formatDate(contract.HD_Ngay)}</td>
                     <td>{contract.SP_Ten}</td>
-                    <td>{contract.LHD_ID}</td>
-                    <td>{contract.HD_GiaTri}</td>
+                    <td>{contract.LHD_NAME}</td>
+                    <td>{formatCurrency(contract.HD_GiaTri)}<span> đ</span></td>
                     <td>{contract.SP_BPQuanLy}</td>
                     <td>{contract.QT_ID}</td>
                     <td>{contract.HD_HienTrang}</td>
                     <td>{contract.HD_Note}</td>
                     <td>
                       <div className='group-container'>
-                        {isOneYearPassed(contract.HD_Ngay, contract.LHD_ID, contract.HD_HienTrang).issueInvoiceTime && <ion-icon name="reader"></ion-icon>}
-                        {isOneYearPassed(contract.HD_Ngay, contract.LHD_ID, contract.HD_HienTrang).oneYearPassed && <ion-icon name="build"></ion-icon>}
+                        {isOneYearPassed(contract.HD_Ngay, contract.LHD_ID, contract.HD_HienTrang).issueInvoiceTime && (
+                          <ion-icon name="reader" onClick={() => handleEditClick(contract)}></ion-icon>
+                        )}
+                        {isOneYearPassed(contract.HD_Ngay, contract.LHD_ID, contract.HD_HienTrang).oneYearPassed && (
+                          <ion-icon name="build" onClick={() => handleAddMaintenanceClick(contract)}></ion-icon>
+                        )}
                       </div>
                     </td>
                   </tr>
@@ -155,6 +191,16 @@ const Container = ({ searchTerm }) => {
           </div>
         </div>
       </div>
+      {isInvoicePopupOpen && (
+        <Popup open={isInvoicePopupOpen} onClose={closeInvoicePopup} modal nested>
+          {close => <PopupInvoice onClose={closeInvoicePopup} contract={selectedContract} />}
+        </Popup>
+      )}
+      {isMaintenancePopupOpen && (
+        <Popup open={isMaintenancePopupOpen} onClose={closeMaintenancePopup} modal nested>
+          {close => <PopupAddMaintenance onClose={closeMaintenancePopup} contract={selectedContract} />}
+        </Popup>
+      )}
     </div>
   );
 };

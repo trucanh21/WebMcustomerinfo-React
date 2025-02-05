@@ -5,8 +5,6 @@ function makeInvoiceService() {
         const invoice = {
             HD_ID: payload.HD_ID,
             HoaD_Ngay: payload.HoaD_Ngay,
-            HoaD_GiaTriHopDong: payload.HoaD_GiaTriHopDong,
-            HoaD_BoPhanQuanLy: payload.HoaD_BoPhanQuanLy,
             HoaD_HienTrangThanhToan: payload.HoaD_HienTrangThanhToan,
             HoaD_NgayThanhToan: payload.HoaD_NgayThanhToan,
         };
@@ -24,50 +22,30 @@ function makeInvoiceService() {
     }
 
     async function getManyInvoices(query) {
-        const { HoaD_BoPhanQuanLy, HoaD_HienTrangThanhToan, page = 1, limit = 10 } = query;
-        const offset = (page - 1) * limit;
+    const { HD_ID } = query;
 
-        const results = await knex('HoaDon')
-            .leftJoin('HopDong', 'HoaDon.HD_ID', 'HopDong.HD_ID')
-            .where((builder) => {
-                if (HoaD_BoPhanQuanLy) {
-                    builder.where('HoaD_BoPhanQuanLy', 'like', `%${HoaD_BoPhanQuanLy}%`);
-                }
-                if (HoaD_HienTrangThanhToan !== undefined) {
-                    builder.where('HoaD_HienTrangThanhToan', 'like', `%${HoaD_HienTrangThanhToan}%`);
-                }
-            })
-            .select(
-                knex.raw('count(*) OVER() AS recordsCount'),
-                'HoaD_ID',
-                'HD_ID',
-                'HoaD_Ngay',
-                'HoaD_GiaTriHopDong',
-                'HoaD_BoPhanQuanLy',
-                'HoaD_HienTrangThanhToan',
-                'HoaD_NgayThanhToan',
-                knex.raw('CONCAT(HopDong.HD_Loai, " - ", HopDong.HD_Ngay) AS InvoiceDetails')
-            )
-            .limit(limit)
-            .offset(offset);
+    const results = await knex('HoaDon')
+        .leftJoin('HopDong', 'HoaDon.HD_ID', 'HopDong.HD_ID')
+        .leftJoin('SanPham', 'HopDong.SP_ID', 'SanPham.SP_ID')
+        .modify((builder) => {
+            if (HD_ID) {
+                builder.where('HoaDon.HD_ID', 'like', `%${HD_ID}%`);
+            }
+        })
+        .select(
+            'HoaDon.HoaD_ID',
+            'HoaDon.HD_ID',
+            'HoaDon.HoaD_Ngay',
+            'HopDong.HD_GiaTri AS HoaD_GiaTriHopDong',
+            'SanPham.SP_BPQuanLy AS HoaD_BoPhanQuanLy',
+            'HoaDon.HoaD_HienTrangThanhToan',
+            'HoaDon.HoaD_NgayThanhToan'
+        );
 
-        let totalRecords = 0;
-        const invoices = results.map((result) => {
-            totalRecords = result.recordsCount;
-            delete result.recordsCount;
-            return result;
-        });
-
-        return {
-            metadata: {
-                totalRecords,
-                currentPage: page,
-                totalPages: Math.ceil(totalRecords / limit),
-                pageSize: limit,
-            },
-            invoices,
-        };
-    }
+    return {
+        invoices: results,
+    };
+}
 
     async function updateInvoice(HoaD_ID, payload) {
         const update = readInvoice(payload);

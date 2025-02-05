@@ -37,23 +37,17 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="sidebar-logo">
-        <a href="index.html" className="logo">
+        <Link to="/qlkh">
           <img
             src={LogoDTSoft}
             alt="navbar brand"
             className="navbar-brand"
             height="70"
           />
-        </a>
+        </Link>
       </div>
       <div className="sidebar-content">
         <ul className="nav nav-secondary">
-          <li className="nav-item active">
-            <a href="">
-              <ion-icon name="home-outline"></ion-icon>
-              <p className="header-menu">Trang chủ</p>
-            </a>
-          </li>
           <li className="nav-item active">
             <Link to="/qlkh">
               <ion-icon name="people-outline"></ion-icon>

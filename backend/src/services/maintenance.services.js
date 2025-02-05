@@ -4,11 +4,10 @@ function makeMaintenanceService() {
     function readMaintenance(payload) {
         const maintenance = {
             HD_ID: payload.HD_ID,
-            SP_ID: payload.SP_ID,
+            SP_Ten: payload.SP_Ten,
             BT_Ngay: payload.BT_Ngay,
             BT_CanBoThucHien: payload.BT_CanBoThucHien,
             BT_NoiDung: payload.BT_NoiDung,
-            BT_Note: payload.BT_Note,
         };
         // Remove undefined fields
         Object.keys(maintenance).forEach(
@@ -24,51 +23,30 @@ function makeMaintenanceService() {
     }
 
     async function getManyMaintenances(query) {
-        const { BT_CanBoThucHien, BT_NoiDung, page = 1, limit = 10 } = query;
-        const offset = (page - 1) * limit;
+        const { BT_ID, SP_Ten } = query;
 
         const results = await knex('BaoTri')
             .leftJoin('HopDong', 'BaoTri.HD_ID', 'HopDong.HD_ID')
-            .leftJoin('SanPham', 'BaoTri.SP_ID', 'SanPham.SP_ID')
             .where((builder) => {
-                if (BT_CanBoThucHien) {
-                    builder.where('BT_CanBoThucHien', 'like', `%${BT_CanBoThucHien}%`);
+                if (BT_ID) {
+                    builder.where('BaoTri.BT_ID', 'like', `%${BT_ID}%`);
                 }
-                if (BT_NoiDung) {
-                    builder.where('BT_NoiDung', 'like', `%${BT_NoiDung}%`);
+                if (SP_Ten) {
+                    builder.where('BaoTri.SP_Ten', 'like', `%${SP_Ten}%`);
                 }
             })
             .select(
-                knex.raw('count(*) OVER() AS recordsCount'),
-                'BT_ID',
-                'HD_ID',
-                'SP_ID',
-                'BT_Ngay',
-                'BT_CanBoThucHien',
-                'BT_NoiDung',
-                'BT_Note',
-                knex.raw('CONCAT(HopDong.HD_Loai, " - ", SanPham.SP_Ten) AS MaintenanceDetails')
-            )
-            .limit(limit)
-            .offset(offset);
+                'BaoTri.BT_ID',
+                'BaoTri.HD_ID',
+                'BaoTri.SP_Ten',
+                'BaoTri.BT_Ngay',
+                'BaoTri.BT_CanBoThucHien',
+                'BaoTri.BT_NoiDung'
+            );
 
-        let totalRecords = 0;
-        const maintenances = results.map((result) => {
-            totalRecords = result.recordsCount;
-            delete result.recordsCount;
-            return result;
-        });
-
-        return {
-            metadata: {
-                totalRecords,
-                currentPage: page,
-                totalPages: Math.ceil(totalRecords / limit),
-                pageSize: limit,
-            },
-            maintenances,
-        };
+        return results;
     }
+
 
     async function updateMaintenance(BT_ID, payload) {
         const update = readMaintenance(payload);

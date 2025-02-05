@@ -107,3 +107,8 @@ textarea:focus {
     border-color: #0149CD;
     box-shadow: 0 0 5px rgba(1, 73, 205, 0.5);
 }
+
+input[readonly] {
+    background-color: #f0f0f0;
+    /* Màu nền khi ô là readonly */
+}

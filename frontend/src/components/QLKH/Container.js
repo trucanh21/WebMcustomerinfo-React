@@ -6,8 +6,9 @@ import PopupContent from '../../components/QLKH/PopupContent';
 import PopupEdit from '../../components/QLKH/PopupEdit';
 import { fetchCustomers } from '../../features/apiCalls';
 import MainHeader from './MainHeader';
+import * as XLSX from 'xlsx'; // Correct import statement
 
-const Container = ({ searchTerm }) => { // Nhận searchTerm từ prop
+const Container = ({ searchTerm }) => {
   const [customers, setCustomers] = useState([]);
   const [filteredCustomers, setFilteredCustomers] = useState([]);
   const [selectedCustomer, setSelectedCustomer] = useState(null);
@@ -50,9 +51,25 @@ const Container = ({ searchTerm }) => { // Nhận searchTerm từ prop
     setSelectedCustomer(null);
   };
 
+  const handleExport = () => {
+    const sheetData = customers.map(customer => ({
+      'Mã KH': customer.KH_ID,
+      'Tên đơn vị': customer.KH_Ten,
+      'Đại diện': customer.KH_DaiDien,
+      'Điện thoại': customer.KH_SDT,
+      'Tài khoản': customer.KH_TaiKhoan,
+      'Phân loại đơn vị': customer.KH_PLDonVi,
+      'Địa chỉ': customer.KH_DiaChi,
+    }));
+
+    const wb = XLSX.utils.book_new();
+    const ws = XLSX.utils.json_to_sheet(sheetData);
+    XLSX.utils.book_append_sheet(wb, ws, 'Customers');
+    XLSX.writeFile(wb, 'Customers.xlsx');
+  };
+
   return (
     <div className="container">
-     
       <div className="page-inner">
         <div className="page-header">
           <h3>Quản lý khách hàng</h3>
@@ -66,7 +83,7 @@ const Container = ({ searchTerm }) => { // Nhận searchTerm từ prop
               </button>} modal nested>
               {close => <PopupContent onClose={close} />}
             </Popup>
-            <button className="button-header">
+            <button className="button-header" onClick={handleExport}>
               <div className="button-add-export">
                 <span className="button-icon"><ion-icon name="download-sharp"></ion-icon></span>
                 <span className="button-text">Xuất excel</span>

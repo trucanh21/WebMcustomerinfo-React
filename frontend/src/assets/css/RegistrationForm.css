@@ -114,3 +114,52 @@
   text-align: center;
   margin-top: 20px;
 }
+
+.GroupProvince {
+  display: flex;
+  justify-content: space-between;
+}
+
+.province,
+.districts {
+  width: 170px;
+  /* Chiều rộng mong muốn */
+  /* padding: 5px; */
+  /* Điều chỉnh padding nếu cần */
+  /* margin-right: 10px; */
+  /* Khoảng cách giữa các ô */
+  /* font-size: 14px; */
+  /* Kích thước chữ */
+  /* Bạn có thể thêm các thuộc tính CSS khác nếu cần */
+}
+
+.wards {
+  width: 110px;
+}
+
+.level,
+.province,
+.districts,
+.wards {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.level {
+  width: 100%;
+}
+.space-popup {
+  margin-bottom: 15px;
+}
+
+.space-popup label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.space-popup select {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+}

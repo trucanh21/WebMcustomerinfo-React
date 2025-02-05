@@ -115,6 +115,7 @@ const RegistrationForm = () => {
           <input
             type="text"
             name="username"
+            placeholder="Nhập tên đăng nhập"
             value={formData.username}
             onChange={handleInputChange}
             required
@@ -124,33 +125,18 @@ const RegistrationForm = () => {
           <label>Mật khẩu:</label>
           <input
             type="password"
+            placeholder="Nhập mật khẩu"
             name="password"
             value={formData.password}
             onChange={handleInputChange}
             required
           />
         </div>
-        <div>
-          <label>Phân cấp:</label>
-          <select value={level} onChange={handleLevelChange} required>
-            <option value="">Chọn cấp</option>
-            <option value="commune">Xã</option>
-            <option value="district">Huyện</option>
-            <option value="province">Tỉnh</option>
-          </select>
-        </div>
-        <div className="location-fields">
+        <div className="location-fields GroupProvince">
           <div>
             <label>Tên tỉnh:</label>
-            {/* <input
-              type="text"
-              name="provinceName"
-              value={formData.provinceName}
-              onChange={handleInputChange}
-              required
-            /> */}
             <select
-              className=""
+              className="province"
               value={selectedProvince}
               onChange={(e) => setSelectedProvince(e.target.value)}
             >
@@ -164,19 +150,7 @@ const RegistrationForm = () => {
           </div>
           <div>
             <label>Tên huyện:</label>
-            {/* <input
-              type="text"
-              name="districtName"
-              value={formData.districtName}
-              onChange={handleInputChange}
-              required
-            /> */}
-            <select
-              className=""
-              value={selectedDistrict}
-              onChange={(e) => setSelectedDistrict(e.target.value)}
-              disabled={!selectedProvince}
-            >
+            <select value={selectedDistrict} className="districts " onChange={(e) => setSelectedDistrict(e.target.value)} disabled={!selectedProvince}>
               <option onChange={handleInputChange}>Chọn quận huyện</option>
               {districts.map((district) => (
                 <option key={district.district_id} value={district.district_id}>
@@ -187,15 +161,8 @@ const RegistrationForm = () => {
           </div>
           <div>
             <label>Tên xã:</label>
-            {/* <input
-              type="text"
-              name="communeName"
-              value={formData.communeName}
-              onChange={handleInputChange}
-              required
-            /> */}
             <select
-              className=""
+              className="wards "
               value={selectedWard}
               onChange={(e) => setSelectedWard(e.target.value)}
               disabled={!selectedDistrict}
@@ -208,6 +175,15 @@ const RegistrationForm = () => {
               ))}
             </select>
           </div>
+        </div>
+        <div>
+          <label>Phân cấp:</label>
+          <select value={level} className="level" onChange={handleLevelChange} required>
+            <option value="">Chọn cấp</option>
+            <option value="commune">Xã</option>
+            <option value="district">Huyện</option>
+            <option value="province">Tỉnh</option>
+          </select>
         </div>
         <button type="submit">Đăng ký</button>
       </form>
