@@ -4,6 +4,19 @@ const API_BASE_URL = "http://localhost:3000/api/contacts/";
 const ADDRESS_API_BASE_URL = "http://localhost:3000/api";
 const ADDRESS_API_BASE_URL_test = "http://localhost:3000/api";
 
+export const authLogin = async (form) => {
+  try {
+    const response = await axios.post(
+      `${ADDRESS_API_BASE_URL_test}/auth/login`,
+      form
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching products", error);
+    throw error;
+  }
+};
 // ----------------------- API INVOICE --------------------
 
 export const fetchInvoice = async () => {
@@ -111,7 +124,7 @@ export const deleteCustomer = async (id) => {
   }
 };
 
-//auth
+// ----------------------- AUTH --------------------
 
 export const authRegister = async (form) => {
   try {
@@ -127,19 +140,7 @@ export const authRegister = async (form) => {
   }
 };
 
-export const authLogin = async (form) => {
-  try {
-    const response = await axios.post(
-      `${ADDRESS_API_BASE_URL_test}/auth/login`,
-      form
-    );
-    console.log(response.data);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching products", error);
-    throw error;
-  }
-};
+
 
 // ----------------------- API PRODUCT --------------------
 

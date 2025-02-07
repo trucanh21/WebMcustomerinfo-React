@@ -1,40 +1,39 @@
 import React, { useState } from "react";
 import '../../assets/css/RegistrationForm.css';
 import { authLogin } from "../../features/apiCalls";
+
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: value,
-    });
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      const authLog = async () => {
-        try {
-          const auth = await authLogin(formData);
-        } catch (error) {
-          console.error("Error fetching customers", error);
-        }
-      };
-      authLog();
-      if (authLog) {
-        localStorage.setItem("isLogin", true);
+    setError("");
 
-        window.location.href = "/qlkh";
-      }
-    } catch (error) {
-      console.error("Error fetching customers", error);
+    if (!formData.username || !formData.password) {
+      setError("Tên đăng nhập và mật khẩu không được để trống");
+      return;
     }
-    console.log(formData);
+
+    try {
+      const response = await authLogin(formData);
+      localStorage.setItem("isLogin", "true");
+      window.location.href = "/qlkh";
+    } catch (error) {
+      setError("Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin đăng nhập.");
+      console.error("Login error:", error);
+    }
   };
 
   return (
@@ -63,6 +62,7 @@ const LoginForm = () => {
             required
           />
         </div>
+        {error && <p className="error-message">{error}</p>}
         <button type="submit">Đăng nhập</button>
       </form>
       <div className="login-link">
@@ -87,13 +87,6 @@ const LoginForm = () => {
         }
         .login-link a:hover {
           text-decoration: underline;
-        }
-        h1 {
-          margin-bottom: 30px;
-          margin-top: 30px;
-          font-size: 32px;
-          text-align: center;
-          color: #333;
         }
       `}</style>
     </div>

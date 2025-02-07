@@ -29,12 +29,24 @@ function makeAuthService() {
   }
 
   async function login(QT_Ten, matkhau) {
-    const admin = await knex("QuanTri").where("QT_Ten", QT_Ten).first();
-    if (admin && (await bcrypt.compare(matkhau, admin.matkhau))) {
-      return admin;
-    }
-    return null;
+  const admin = await knex("QuanTri").where("QT_Ten", QT_Ten).first();
+
+  if (!admin) {
+    console.log("Người dùng không tồn tại!");
+    return null;  // Nếu không tìm thấy user, trả về null
   }
+
+  const isMatch = await bcrypt.compare(matkhau, admin.matkhau);
+  
+  if (!isMatch) {
+    console.log("Mật khẩu không đúng!");
+    return null;  // Nếu mật khẩu không đúng, trả về null
+  }
+
+  console.log("Đăng nhập thành công!", admin);
+  return admin;
+}
+
   return {
     register,
     login,
