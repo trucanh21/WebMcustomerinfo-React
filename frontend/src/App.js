@@ -1,4 +1,3 @@
-
 import React from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import QLKH from "./pages/QLKH";
@@ -24,6 +23,7 @@ function App() {
     <BrowserRouter>
       {/* {isLogin === true && <MainHeader></MainHeader>} */}
       <Routes>
+        <Route path="/" element={isLogin ? <QLKH /> : <Navigate to="/login" />} />
         <Route path="/qlsp" element={isLogin ? <QLSP /> : <Navigate to="/login" />} />
         <Route path="/qlkh" element={isLogin ? <QLKH /> : <Navigate to="/login" />} />
         <Route path="/qlbh" element={isLogin ? <QLBH /> : <Navigate to="/login" />} />
