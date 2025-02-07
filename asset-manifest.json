@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/trucanh21.github.io/WebMcustomerinfo-React/static/css/main.efda2031.css",
+    "main.js": "/trucanh21.github.io/WebMcustomerinfo-React/static/js/main.eb59cd0a.js",
+    "static/js/453.ed3810f9.chunk.js": "/trucanh21.github.io/WebMcustomerinfo-React/static/js/453.ed3810f9.chunk.js",
+    "static/media/LogoDTSoft.png": "/trucanh21.github.io/WebMcustomerinfo-React/static/media/LogoDTSoft.dc4f2b92e385294c9344.png",
+    "static/media/work.png": "/trucanh21.github.io/WebMcustomerinfo-React/static/media/work.cbdca23dd34c72fe8af6.png",
+    "static/media/profile.jpg": "/trucanh21.github.io/WebMcustomerinfo-React/static/media/profile.cb14d273471f29feb446.jpg",
+    "static/media/contract.png": "/trucanh21.github.io/WebMcustomerinfo-React/static/media/contract.714ca39753179e48a206.png",
+    "static/media/payment.png": "/trucanh21.github.io/WebMcustomerinfo-React/static/media/payment.0a4f61420e5c05151765.png",
+    "index.html": "/trucanh21.github.io/WebMcustomerinfo-React/index.html",
+    "main.efda2031.css.map": "/trucanh21.github.io/WebMcustomerinfo-React/static/css/main.efda2031.css.map",
+    "main.eb59cd0a.js.map": "/trucanh21.github.io/WebMcustomerinfo-React/static/js/main.eb59cd0a.js.map",
+    "453.ed3810f9.chunk.js.map": "/trucanh21.github.io/WebMcustomerinfo-React/static/js/453.ed3810f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.efda2031.css",
+    "static/js/main.eb59cd0a.js"
+  ]
+}
